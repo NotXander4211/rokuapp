@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<component name="HelloWorld" extends="Scene"> 
+  <children>
+    <Label id="info" text="Tic-Tac-Toe: Use arrows + OK" width="1280" height="80" horizAlign="center" vertAlign="top" translation="[0,20]" />
+    <Rectangle id="highlight1" color="0xFFFF00FF" width="200" height="120" translation="[320,140]" visible="false" />
+    <Label id="cell1" text="" translation="[320,140]" width="200" height="120" horizAlign="center" vertAlign="center" />
+    <Rectangle id="highlight2" color="0xFFFF00FF" width="200" height="120" translation="[540,140]" visible="false" />
+    <Label id="cell2" text="" translation="[540,140]" width="200" height="120" horizAlign="center" vertAlign="center" />
+    <Rectangle id="highlight3" color="0xFFFF00FF" width="200" height="120" translation="[760,140]" visible="false" />
+    <Label id="cell3" text="" translation="[760,140]" width="200" height="120" horizAlign="center" vertAlign="center" />
+    <Rectangle id="highlight4" color="0xFFFF00FF" width="200" height="120" translation="[320,300]" visible="false" />
+    <Label id="cell4" text="" translation="[320,300]" width="200" height="120" horizAlign="center" vertAlign="center" />
+    <Rectangle id="highlight5" color="0xFFFF00FF" width="200" height="120" translation="[540,300]" visible="false" />
+    <Label id="cell5" text="" translation="[540,300]" width="200" height="120" horizAlign="center" vertAlign="center" />
+    <Rectangle id="highlight6" color="0xFFFF00FF" width="200" height="120" translation="[760,300]" visible="false" />
+    <Label id="cell6" text="" translation="[760,300]" width="200" height="120" horizAlign="center" vertAlign="center" />
+    <Rectangle id="highlight7" color="0xFFFF00FF" width="200" height="120" translation="[320,460]" visible="false" />
+    <Label id="cell7" text="" translation="[320,460]" width="200" height="120" horizAlign="center" vertAlign="center" />
+    <Rectangle id="highlight8" color="0xFFFF00FF" width="200" height="120" translation="[540,460]" visible="false" />
+    <Label id="cell8" text="" translation="[540,460]" width="200" height="120" horizAlign="center" vertAlign="center" />
+    <Rectangle id="highlight9" color="0xFFFF00FF" width="200" height="120" translation="[760,460]" visible="false" />
+    <Label id="cell9" text="" translation="[760,460]" width="200" height="120" horizAlign="center" vertAlign="center" />
+  </children>
+<script type="text/brightscript" uri="helloworld.brs" />
+</component>
