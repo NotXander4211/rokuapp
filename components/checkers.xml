@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component name="checkers" extends="Scene"> 
+    <children>
+        <Group
+            id="mainGroup"
+            width="1280"
+            height="720"
+            horizAlign="center"
+            vertAlign="center">
+      <Group
+                id="board"
+                width="720"
+                height="720"
+                translation="[280,0]"> <!-- (1280-720)/2 = 280 to center horizontally -->
+
+                <!-- Generate 64 square cells (row 0..7, col 0..7).
+                     Top-left is black when (row+col) mod 2 = 0. -->
+                <children>
+                    <Rectangle id="cell_0_0" x="0"   y="0"   width="90" height="90" color="0x000000FF" />
+                    <Rectangle id="cell_0_1" x="90"  y="0"   width="90" height="90" color="0xFFFFFFFF" />
+                    <Rectangle id="cell_0_2" x="180" y="0"   width="90" height="90" color="0x000000FF" />
+                    <Rectangle id="cell_0_3" x="270" y="0"   width="90" height="90" color="0xFFFFFFFF" />
+                    <Rectangle id="cell_0_4" x="360" y="0"   width="90" height="90" color="0x000000FF" />
+                    <Rectangle id="cell_0_5" x="450" y="0"   width="90" height="90" color="0xFFFFFFFF" />
+                    <Rectangle id="cell_0_6" x="540" y="0"   width="90" height="90" color="0x000000FF" />
+                    <Rectangle id="cell_0_7" x="630" y="0"   width="90" height="90" color="0xFFFFFFFF" />
+
+                    <Rectangle id="cell_1_0" x="0"   y="90"  width="90" height="90" color="0xFFFFFFFF" />
+                    <Rectangle id="cell_1_1" x="90"  y="90"  width="90" height="90" color="0x000000FF" />
+                    <Rectangle id="cell_1_2" x="180" y="90"  width="90" height="90" color="0xFFFFFFFF" />
+                    <Rectangle id="cell_1_3" x="270" y="90"  width="90" height="90" color="0x000000FF" />
+                    <Rectangle id="cell_1_4" x="360" y="90"  width="90" height="90" color="0xFFFFFFFF" />
+                    <Rectangle id="cell_1_5" x="450" y="90"  width="90" height="90" color="0x000000FF" />
+                    <Rectangle id="cell_1_6" x="540" y="90"  width="90" height="90" color="0xFFFFFFFF" />
+                    <Rectangle id="cell_1_7" x="630" y="90"  width="90" height="90" color="0x000000FF" />
+
+                    <Rectangle id="cell_2_0" x="0"   y="180" width="90" height="90" color="0x000000FF" />
+                    <Rectangle id="cell_2_1" x="90"  y="180" width="90" height="90" color="0xFFFFFFFF" />
+                    <Rectangle id="cell_2_2" x="180" y="180" width="90" height="90" color="0x000000FF" />
+                    <Rectangle id="cell_2_3" x="270" y="180" width="90" height="90" color="0xFFFFFFFF" />
+                    <Rectangle id="cell_2_4" x="360" y="180" width="90" height="90" color="0x000000FF" />
+                    <Rectangle id="cell_2_5" x="450" y="180" width="90" height="90" color="0xFFFFFFFF" />
+                    <Rectangle id="cell_2_6" x="540" y="180" width="90" height="90" color="0x000000FF" />
+                    <Rectangle id="cell_2_7" x="630" y="180" width="90" height="90" color="0xFFFFFFFF" />
+
+                    <Rectangle id="cell_3_0" x="0"   y="270" width="90" height="90" color="0xFFFFFFFF" />
+                    <Rectangle id="cell_3_1" x="90"  y="270" width="90" height="90" color="0x000000FF" />
+                    <Rectangle id="cell_3_2" x="180" y="270" width="90" height="90" color="0xFFFFFFFF" />
+                    <Rectangle id="cell_3_3" x="270" y="270" width="90" height="90" color="0x000000FF" />
+                    <Rectangle id="cell_3_4" x="360" y="270" width="90" height="90" color="0xFFFFFFFF" />
+                    <Rectangle id="cell_3_5" x="450" y="270" width="90" height="90" color="0x000000FF" />
+                    <Rectangle id="cell_3_6" x="540" y="270" width="90" height="90" color="0xFFFFFFFF" />
+                    <Rectangle id="cell_3_7" x="630" y="270" width="90" height="90" color="0x000000FF" />
+
+                    <Rectangle id="cell_4_0" x="0"   y="360" width="90" height="90" color="0x000000FF" />
+                    <Rectangle id="cell_4_1" x="90"  y="360" width="90" height="90" color="0xFFFFFFFF" />
+                    <Rectangle id="cell_4_2" x="180" y="360" width="90" height="90" color="0x000000FF" />
+                    <Rectangle id="cell_4_3" x="270" y="360" width="90" height="90" color="0xFFFFFFFF" />
+                    <Rectangle id="cell_4_4" x="360" y="360" width="90" height="90" color="0x000000FF" />
+                    <Rectangle id="cell_4_5" x="450" y="360" width="90" height="90" color="0xFFFFFFFF" />
+                    <Rectangle id="cell_4_6" x="540" y="360" width="90" height="90" color="0x000000FF" />
+                    <Rectangle id="cell_4_7" x="630" y="360" width="90" height="90" color="0xFFFFFFFF" />
+
+                    <Rectangle id="cell_5_0" x="0"   y="450" width="90" height="90" color="0xFFFFFFFF" />
+                    <Rectangle id="cell_5_1" x="90"  y="450" width="90" height="90" color="0x000000FF" />
+                    <Rectangle id="cell_5_2" x="180" y="450" width="90" height="90" color="0xFFFFFFFF" />
+                    <Rectangle id="cell_5_3" x="270" y="450" width="90" height="90" color="0x000000FF" />
+                    <Rectangle id="cell_5_4" x="360" y="450" width="90" height="90" color="0xFFFFFFFF" />
+                    <Rectangle id="cell_5_5" x="450" y="450" width="90" height="90" color="0x000000FF" />
+                    <Rectangle id="cell_5_6" x="540" y="450" width="90" height="90" color="0xFFFFFFFF" />
+                    <Rectangle id="cell_5_7" x="630" y="450" width="90" height="90" color="0x000000FF" />
+
+                    <Rectangle id="cell_6_0" x="0"   y="540" width="90" height="90" color="0x000000FF" />
+                    <Rectangle id="cell_6_1" x="90"  y="540" width="90" height="90" color="0xFFFFFFFF" />
+                    <Rectangle id="cell_6_2" x="180" y="540" width="90" height="90" color="0x000000FF" />
+                    <Rectangle id="cell_6_3" x="270" y="540" width="90" height="90" color="0xFFFFFFFF" />
+                    <Rectangle id="cell_6_4" x="360" y="540" width="90" height="90" color="0x000000FF" />
+                    <Rectangle id="cell_6_5" x="450" y="540" width="90" height="90" color="0xFFFFFFFF" />
+                    <Rectangle id="cell_6_6" x="540" y="540" width="90" height="90" color="0x000000FF" />
+                    <Rectangle id="cell_6_7" x="630" y="540" width="90" height="90" color="0xFFFFFFFF" />
+
+                    <Rectangle id="cell_7_0" x="0"   y="630" width="90" height="90" color="0xFFFFFFFF" />
+                    <Rectangle id="cell_7_1" x="90"  y="630" width="90" height="90" color="0x000000FF" />
+                    <Rectangle id="cell_7_2" x="180" y="630" width="90" height="90" color="0xFFFFFFFF" />
+                    <Rectangle id="cell_7_3" x="270" y="630" width="90" height="90" color="0x000000FF" />
+                    <Rectangle id="cell_7_4" x="360" y="630" width="90" height="90" color="0xFFFFFFFF" />
+                    <Rectangle id="cell_7_5" x="450" y="630" width="90" height="90" color="0x000000FF" />
+                    <Rectangle id="cell_7_6" x="540" y="630" width="90" height="90" color="0xFFFFFFFF" />
+                    <Rectangle id="cell_7_7" x="630" y="630" width="90" height="90" color="0x000000FF" />
+                </children>
+            </Group>
+        </Group>
+    </children>
+
+    <script type="text/brightscript" uri="checkers.brs" />
+</component>
