@@ -1,0 +1,208 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<component name="checkers" extends="Scene">
+    <children>
+        <Group
+            id="mainGroup"
+            width="1280"
+            height="720"
+            horizAlign="center"
+            vertAlign="center">
+            <children>
+
+                <!-- Board drawn first -->
+                <Group
+                    id="board"
+                    width="720"
+                    height="720"
+                    translation="[280,0]">
+                    <children>
+                        <Rectangle id="cell_a8" translation="[0,0]"   width="90" height="90" color="0xFFFFFFFF" />
+                        <Rectangle id="cell_b8" translation="[90,0]"   width="90" height="90" color="0x000000FF" />
+                        <Rectangle id="cell_c8" translation="[180,0]"   width="90" height="90" color="0xFFFFFFFF" />
+                        <Rectangle id="cell_d8" translation="[270,0]"   width="90" height="90" color="0x000000FF" />
+                        <Rectangle id="cell_e8" translation="[360,0]"   width="90" height="90" color="0xFFFFFFFF" />
+                        <Rectangle id="cell_f8" translation="[450,0]"   width="90" height="90" color="0x000000FF" />
+                        <Rectangle id="cell_g8" translation="[540,0]"   width="90" height="90" color="0xFFFFFFFF" />
+                        <Rectangle id="cell_h8" translation="[630,0]"   width="90" height="90" color="0x000000FF" />
+
+                        <Rectangle id="cell_a7" translation="[0,90]"  width="90" height="90" color="0x000000FF" />
+                        <Rectangle id="cell_b7" translation="[90,90]"  width="90" height="90" color="0xFFFFFFFF" />
+                        <Rectangle id="cell_c7" translation="[180,90]"  width="90" height="90" color="0x000000FF" />
+                        <Rectangle id="cell_d7" translation="[270,90]"  width="90" height="90" color="0xFFFFFFFF" />
+                        <Rectangle id="cell_e7" translation="[360,90]"  width="90" height="90" color="0x000000FF" />
+                        <Rectangle id="cell_f7" translation="[450,90]"  width="90" height="90" color="0xFFFFFFFF" />
+                        <Rectangle id="cell_g7" translation="[540,90]"  width="90" height="90" color="0x000000FF" />
+                        <Rectangle id="cell_h7" translation="[630,90]"  width="90" height="90" color="0xFFFFFFFF" />
+
+                        <Rectangle id="cell_a6" translation="[0,180]" width="90" height="90" color="0xFFFFFFFF" />
+                        <Rectangle id="cell_b6" translation="[90,180]" width="90" height="90" color="0x000000FF" />
+                        <Rectangle id="cell_c6" translation="[180,180]" width="90" height="90" color="0xFFFFFFFF" />
+                        <Rectangle id="cell_d6" translation="[270,180]" width="90" height="90" color="0x000000FF" />
+                        <Rectangle id="cell_e6" translation="[360,180]" width="90" height="90" color="0xFFFFFFFF" />
+                        <Rectangle id="cell_f6" translation="[450,180]" width="90" height="90" color="0x000000FF" />
+                        <Rectangle id="cell_g6" translation="[540,180]" width="90" height="90" color="0xFFFFFFFF" />
+                        <Rectangle id="cell_h6" translation="[630,180]" width="90" height="90" color="0x000000FF" />
+
+                        <Rectangle id="cell_a5" translation="[0,270]" width="90" height="90" color="0x000000FF" />
+                        <Rectangle id="cell_b5" translation="[90,270]" width="90" height="90" color="0xFFFFFFFF" />
+                        <Rectangle id="cell_c5" translation="[180,270]" width="90" height="90" color="0x000000FF" />
+                        <Rectangle id="cell_d5" translation="[270,270]" width="90" height="90" color="0xFFFFFFFF" />
+                        <Rectangle id="cell_e5" translation="[360,270]" width="90" height="90" color="0x000000FF" />
+                        <Rectangle id="cell_f5" translation="[450,270]" width="90" height="90" color="0xFFFFFFFF" />
+                        <Rectangle id="cell_g5" translation="[540,270]" width="90" height="90" color="0x000000FF" />
+                        <Rectangle id="cell_h5" translation="[630,270]" width="90" height="90" color="0xFFFFFFFF" />
+
+                        <Rectangle id="cell_a4" translation="[0,360]" width="90" height="90" color="0xFFFFFFFF" />
+                        <Rectangle id="cell_b4" translation="[90,360]" width="90" height="90" color="0x000000FF" />
+                        <Rectangle id="cell_c4" translation="[180,360]" width="90" height="90" color="0xFFFFFFFF" />
+                        <Rectangle id="cell_d4" translation="[270,360]" width="90" height="90" color="0x000000FF" />
+                        <Rectangle id="cell_e4" translation="[360,360]" width="90" height="90" color="0xFFFFFFFF" />
+                        <Rectangle id="cell_f4" translation="[450,360]" width="90" height="90" color="0x000000FF" />
+                        <Rectangle id="cell_g4" translation="[540,360]" width="90" height="90" color="0xFFFFFFFF" />
+                        <Rectangle id="cell_h4" translation="[630,360]" width="90" height="90" color="0x000000FF" />
+
+                        <Rectangle id="cell_a3" translation="[0,450]" width="90" height="90" color="0x000000FF" />
+                        <Rectangle id="cell_b3" translation="[90,450]" width="90" height="90" color="0xFFFFFFFF" />
+                        <Rectangle id="cell_c3" translation="[180,450]" width="90" height="90" color="0x000000FF" />
+                        <Rectangle id="cell_d3" translation="[270,450]" width="90" height="90" color="0xFFFFFFFF" />
+                        <Rectangle id="cell_e3" translation="[360,450]" width="90" height="90" color="0x000000FF" />
+                        <Rectangle id="cell_f3" translation="[450,450]" width="90" height="90" color="0xFFFFFFFF" />
+                        <Rectangle id="cell_g3" translation="[540,450]" width="90" height="90" color="0x000000FF" />
+                        <Rectangle id="cell_h3" translation="[630,450]" width="90" height="90" color="0xFFFFFFFF" />
+
+                        <Rectangle id="cell_a2" translation="[0,540]" width="90" height="90" color="0xFFFFFFFF" />
+                        <Rectangle id="cell_b2" translation="[90,540]" width="90" height="90" color="0x000000FF" />
+                        <Rectangle id="cell_c2" translation="[180,540]" width="90" height="90" color="0xFFFFFFFF" />
+                        <Rectangle id="cell_d2" translation="[270,540]" width="90" height="90" color="0x000000FF" />
+                        <Rectangle id="cell_e2" translation="[360,540]" width="90" height="90" color="0xFFFFFFFF" />
+                        <Rectangle id="cell_f2" translation="[450,540]" width="90" height="90" color="0x000000FF" />
+                        <Rectangle id="cell_g2" translation="[540,540]" width="90" height="90" color="0xFFFFFFFF" />
+                        <Rectangle id="cell_h2" translation="[630,540]" width="90" height="90" color="0x000000FF" />
+
+                        <Rectangle id="cell_a1" translation="[0,630]" width="90" height="90" color="0x000000FF" />
+                        <Rectangle id="cell_b1" translation="[90,630]" width="90" height="90" color="0xFFFFFFFF" />
+                        <Rectangle id="cell_c1" translation="[180,630]" width="90" height="90" color="0x000000FF" />
+                        <Rectangle id="cell_d1" translation="[270,630]" width="90" height="90" color="0xFFFFFFFF" />
+                        <Rectangle id="cell_e1" translation="[360,630]" width="90" height="90" color="0x000000FF" />
+                        <Rectangle id="cell_f1" translation="[450,630]" width="90" height="90" color="0xFFFFFFFF" />
+                        <Rectangle id="cell_g1" translation="[540,630]" width="90" height="90" color="0x000000FF" />
+                        <Rectangle id="cell_h1" translation="[630,630]" width="90" height="90" color="0xFFFFFFFF" />
+                    </children>
+                </Group>
+
+                <!-- White posters group (top 3 ranks visible; others hidden) -->
+            <Group
+    id="whitePiecesGroup"
+    width="720"
+    height="720"
+    translation="[280,0]">
+    <children>
+        <!-- White pieces on dark squares: ranks 1,2,3 -->
+        <!-- Rank 1 (dark: a1,c1,e1,g1) -->
+        <Poster id="piece_a1" width="80" height="80" translation="[285,635]"   uri="pkg:/images/white_checker.png" visible="true" />
+        <Poster id="piece_c1" width="80" height="80" translation="[465,635]" uri="pkg:/images/white_checker.png" visible="true" />
+        <Poster id="piece_e1" width="80" height="80" translation="[645,635]" uri="pkg:/images/white_checker.png" visible="true" />
+        <Poster id="piece_g1" width="80" height="80" translation="[825,635]" uri="pkg:/images/white_checker.png" visible="true" />
+
+        <!-- Rank 2 (dark: b2,d2,f2,h2) -->
+        <Poster id="piece_b2" width="80" height="80" translation="[375,545]"  uri="pkg:/images/white_checker.png" visible="true" />
+        <Poster id="piece_d2" width="80" height="80" translation="[555,545]" uri="pkg:/images/white_checker.png" visible="true" />
+        <Poster id="piece_f2" width="80" height="80" translation="[735,545]" uri="pkg:/images/white_checker.png" visible="true" />
+        <Poster id="piece_h2" width="80" height="80" translation="[915,545]" uri="pkg:/images/white_checker.png" visible="true" />
+
+        <!-- Rank 3 (dark: a3,c3,e3,g3) -->
+        <Poster id="piece_a3" width="80" height="80" translation="[285,455]"   uri="pkg:/images/white_checker.png" visible="true" />
+        <Poster id="piece_c3" width="80" height="80" translation="[465,455]" uri="pkg:/images/white_checker.png" visible="true" />
+        <Poster id="piece_e3" width="80" height="80" translation="[645,455]" uri="pkg:/images/white_checker.png" visible="true" />
+        <Poster id="piece_g3" width="80" height="80" translation="[825,455]" uri="pkg:/images/white_checker.png" visible="true" />
+
+        <!-- All other playable squares (ranks 4..8) present but hidden -->
+        <Poster id="piece_b4" width="80" height="80" translation="[375,365]"  uri="pkg:/images/white_checker.png" visible="false" />
+        <Poster id="piece_d4" width="80" height="80" translation="[555,365]" uri="pkg:/images/white_checker.png" visible="false" />
+        <Poster id="piece_f4" width="80" height="80" translation="[735,365]" uri="pkg:/images/white_checker.png" visible="false" />
+        <Poster id="piece_h4" width="80" height="80" translation="[915,365]" uri="pkg:/images/white_checker.png" visible="false" />
+
+        <Poster id="piece_a5" width="80" height="80" translation="[285,275]"   uri="pkg:/images/white_checker.png" visible="false" />
+        <Poster id="piece_c5" width="80" height="80" translation="[465,275]" uri="pkg:/images/white_checker.png" visible="false" />
+        <Poster id="piece_e5" width="80" height="80" translation="[645,275]" uri="pkg:/images/white_checker.png" visible="false" />
+        <Poster id="piece_g5" width="80" height="80" translation="[825,275]" uri="pkg:/images/white_checker.png" visible="false" />
+
+        <Poster id="piece_b6" width="80" height="80" translation="[375,185]"  uri="pkg:/images/white_checker.png" visible="false" />
+        <Poster id="piece_d6" width="80" height="80" translation="[555,185]" uri="pkg:/images/white_checker.png" visible="false" />
+        <Poster id="piece_f6" width="80" height="80" translation="[735,185]" uri="pkg:/images/white_checker.png" visible="false" />
+        <Poster id="piece_h6" width="80" height="80" translation="[915,185]" uri="pkg:/images/white_checker.png" visible="false" />
+
+        <Poster id="piece_a7" width="80" height="80" translation="[285,95]"   uri="pkg:/images/white_checker.png" visible="false" />
+        <Poster id="piece_c7" width="80" height="80" translation="[465,95]" uri="pkg:/images/white_checker.png" visible="false" />
+        <Poster id="piece_e7" width="80" height="80" translation="[645,95]" uri="pkg:/images/white_checker.png" visible="false" />
+        <Poster id="piece_g7" width="80" height="80" translation="[825,95]" uri="pkg:/images/white_checker.png" visible="false" />
+
+        <Poster id="piece_b8" width="80" height="80" translation="[375,5]"  uri="pkg:/images/white_checker.png" visible="false" />
+        <Poster id="piece_d8" width="80" height="80" translation="[555,5]" uri="pkg:/images/white_checker.png" visible="false" />
+        <Poster id="piece_f8" width="80" height="80" translation="[735,5]" uri="pkg:/images/white_checker.png" visible="false" />
+        <Poster id="piece_h8" width="80" height="80" translation="[915,5]" uri="pkg:/images/white_checker.png" visible="false" />
+    </children>
+</Group>
+
+<Group
+    id="purplePiecesGroup"
+    width="720"
+    height="720"
+    translation="[280,0]">
+    <children>
+        <!-- Purple pieces on dark squares: ranks 8,7,6 -->
+        <!-- Rank 8 (dark: b8,d8,f8,h8) -->
+        <Poster id="piece_b8_purple" width="80" height="80" translation="[375,5]"  uri="pkg:/images/purple_checker.png" visible="true" />
+        <Poster id="piece_d8_purple" width="80" height="80" translation="[555,5]" uri="pkg:/images/purple_checker.png" visible="true" />
+        <Poster id="piece_f8_purple" width="80" height="80" translation="[735,5]" uri="pkg:/images/purple_checker.png" visible="true" />
+        <Poster id="piece_h8_purple" width="80" height="80" translation="[915,5]" uri="pkg:/images/purple_checker.png" visible="true" />
+
+        <!-- Rank 7 (dark: a7,c7,e7,g7) -->
+        <Poster id="piece_a7_purple" width="80" height="80" translation="[285,95]"   uri="pkg:/images/purple_checker.png" visible="true" />
+        <Poster id="piece_c7_purple" width="80" height="80" translation="[465,95]" uri="pkg:/images/purple_checker.png" visible="true" />
+        <Poster id="piece_e7_purple" width="80" height="80" translation="[645,95]" uri="pkg:/images/purple_checker.png" visible="true" />
+        <Poster id="piece_g7_purple" width="80" height="80" translation="[825,95]" uri="pkg:/images/purple_checker.png" visible="true" />
+
+        <!-- Rank 6 (dark: b6,d6,f6,h6) -->
+        <Poster id="piece_b6_purple" width="80" height="80" translation="[375,185]"  uri="pkg:/images/purple_checker.png" visible="true" />
+        <Poster id="piece_d6_purple" width="80" height="80" translation="[555,185]" uri="pkg:/images/purple_checker.png" visible="true" />
+        <Poster id="piece_f6_purple" width="80" height="80" translation="[735,185]" uri="pkg:/images/purple_checker.png" visible="true" />
+        <Poster id="piece_h6_purple" width="80" height="80" translation="[915,185]" uri="pkg:/images/purple_checker.png" visible="true" />
+
+        <!-- All other playable squares present but hidden -->
+        <Poster id="piece_a6_purple" width="80" height="80" translation="[285,185]"   uri="pkg:/images/purple_checker.png" visible="false" />
+        <Poster id="piece_c6_purple" width="80" height="80" translation="[465,185]" uri="pkg:/images/purple_checker.png" visible="false" />
+        <Poster id="piece_e6_purple" width="80" height="80" translation="[645,185]" uri="pkg:/images/purple_checker.png" visible="false" />
+        <Poster id="piece_g6_purple" width="80" height="80" translation="[825,185]" uri="pkg:/images/purple_checker.png" visible="false" />
+
+        <Poster id="piece_b5_purple" width="80" height="80" translation="[375,275]"  uri="pkg:/images/purple_checker.png" visible="false" />
+        <Poster id="piece_d5_purple" width="80" height="80" translation="[555,275]" uri="pkg:/images/purple_checker.png" visible="false" />
+        <Poster id="piece_f5_purple" width="80" height="80" translation="[735,275]" uri="pkg:/images/purple_checker.png" visible="false" />
+        <Poster id="piece_h5_purple" width="80" height="80" translation="[915,275]" uri="pkg:/images/purple_checker.png" visible="false" />
+
+        <Poster id="piece_a4_purple" width="80" height="80" translation="[285,365]"   uri="pkg:/images/purple_checker.png" visible="false" />
+        <Poster id="piece_c4_purple" width="80" height="80" translation="[465,365]" uri="pkg:/images/purple_checker.png" visible="false" />
+        <Poster id="piece_e4_purple" width="80" height="80" translation="[645,365]" uri="pkg:/images/purple_checker.png" visible="false" />
+        <Poster id="piece_g4_purple" width="80" height="80" translation="[825,365]" uri="pkg:/images/purple_checker.png" visible="false" />
+
+        <Poster id="piece_b3_purple" width="80" height="80" translation="[375,455]"  uri="pkg:/images/purple_checker.png" visible="false" />
+        <Poster id="piece_d3_purple" width="80" height="80" translation="[555,455]" uri="pkg:/images/purple_checker.png" visible="false" />
+        <Poster id="piece_f3_purple" width="80" height="80" translation="[735,455]" uri="pkg:/images/purple_checker.png" visible="false" />
+        <Poster id="piece_h3_purple" width="80" height="80" translation="[915,455]" uri="pkg:/images/purple_checker.png" visible="false" />
+
+        <Poster id="piece_a2_purple" width="80" height="80" translation="[285,545]"   uri="pkg:/images/purple_checker.png" visible="false" />
+        <Poster id="piece_c2_purple" width="80" height="80" translation="[465,545]" uri="pkg:/images/purple_checker.png" visible="false" />
+        <Poster id="piece_e2_purple" width="80" height="80" translation="[645,545]" uri="pkg:/images/purple_checker.png" visible="false" />
+        <Poster id="piece_g2_purple" width="80" height="80" translation="[825,545]" uri="pkg:/images/purple_checker.png" visible="false" />
+
+        <Poster id="piece_b1_purple" width="80" height="80" translation="[375,635]"  uri="pkg:/images/purple_checker.png" visible="false" />
+        <Poster id="piece_d1_purple" width="80" height="80" translation="[555,635]" uri="pkg:/images/purple_checker.png" visible="false" />
+        <Poster id="piece_f1_purple" width="80" height="80" translation="[735,635]" uri="pkg:/images/purple_checker.png" visible="false" />
+    </children>
+</Group>
+
+            </children>
+        </Group>
+    </children>
+    <script type="text/brightscript" uri="checkers.brs" />
+</component>
