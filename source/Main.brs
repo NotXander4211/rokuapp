@@ -11,7 +11,7 @@ sub Main()
     m.port = CreateObject("roMessagePort")
     screen.setMessagePort(m.port)
 
-    scene = screen.CreateScene("HomePage")
+    scene = screen.CreateScene("HomePage2")
     screen.show()
 
     ' Keep the app running until the screen is closed
