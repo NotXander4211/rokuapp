@@ -67,7 +67,7 @@
             height="60"
             horizAlign="center"
             vertAlign="bottom"
-            translation="[0,-30]" />
+            translation="[0,20]" />
 
     </children>
 
