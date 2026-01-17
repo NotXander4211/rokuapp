@@ -18,35 +18,41 @@
             vertAlign="top"
             translation="[0,60]" />
 
-        <!-- Buttons Group -->
+        <!-- Button Container (Centered) -->
         <Group
             id="buttonsGroup"
-            width="1280"
-            height="200"
-            translation="[0,260]">
+            width="800"
+            height="140"
+            translation="[240,300]">
 
-            <!-- Tic-Tac-Toe (Left) -->
+            <!-- Tic-Tac-Toe -->
             <Button
                 id="btnTic"
                 width="360"
-                height="110"
-                translation="[240,0]"
+                height="120"
+                translation="[0,0]"
                 focusable="true">
+
                 <Label
                     text="Tic-Tac-Toe"
+                    width="360"
+                    height="120"
                     horizAlign="center"
                     vertAlign="center" />
             </Button>
 
-            <!-- Checkers (Right) -->
+            <!-- Checkers -->
             <Button
                 id="btnCheckers"
                 width="360"
-                height="110"
-                translation="[680,0]"
+                height="120"
+                translation="[440,0]"
                 focusable="true">
+
                 <Label
                     text="Checkers"
+                    width="360"
+                    height="120"
                     horizAlign="center"
                     vertAlign="center" />
             </Button>
@@ -78,7 +84,7 @@
             m.title.font.size = 88
             m.Stext.font.size = 28
 
-            ' Set initial focus to left button
+            ' Set initial focus
             m.btnTic.setFocus(true)
         end function
 
