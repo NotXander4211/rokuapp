@@ -1,75 +1,102 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<component name="HomePage2" extends="Scene" backgroundColor="0x4F01A3FF">
-	<children>
-		<!-- Big centered title -->
-		<Label
-			id="title"
-			text="Welcome to Roku Hub!"
-			width="1280"
-			height="180"
-			horizAlign="center"
-			vertAlign="top"
-			translation="[0,60]"
-		/>
+<component name="HomePage2" extends="Scene">
+    <children>
 
-		<!-- Buttons below title with Tic-Tac-Toe on left and Checkers on right -->
-		<Group id="buttonsGroup" width="1280" height="240" horizAlign="center" vertAlign="top" translation="[0,280]">
-			<Button id="btnTic" width="400" height="120" translation="[-220,0]" horizAlign="center" vertAlign="center">
-				<Label text="Tic-Tac-Toe" horizAlign="center" vertAlign="center" />
-			</Button>
+        <!-- Background -->
+        <Rectangle
+            width="1280"
+            height="720"
+            color="0x5A2D82FF" />
 
-			<Button id="btnCheckers" width="400" height="120" translation="[220,0]" horizAlign="center" vertAlign="center">
-				<Label text="Checkers" horizAlign="center" vertAlign="center" />
-			</Button>
-		</Group>
+        <!-- Title -->
+        <Label
+            id="title"
+            text="Welcome to Roku Hub!"
+            width="1280"
+            height="120"
+            horizAlign="center"
+            vertAlign="top"
+            translation="[0,60]" />
 
-		<!-- Smaller text for the user to read -->
-		<Label
-			id="Stext"
-			text="Click the following buttons for games!"
-			width="1280"
-			height="80"
-			horizAlign="center"
-			vertAlign="bottom"
-			translation="[0,-40]"
-		/>
-	</children>
-	<!-- Main script for the button presses -->
-	<script type="text/brightscript"><![CDATA[
-		function init()
-			m.top.setFocus(true)
+        <!-- Buttons Group -->
+        <Group
+            id="buttonsGroup"
+            width="1280"
+            height="200"
+            translation="[0,260]">
 
-			m.title = m.top.findNode("title")
-			m.btnCheckers = m.top.findNode("btnCheckers")
-			m.btnTic = m.top.findNode("btnTic")
-			m.Stext = m.top.findNode("Stext")
+            <!-- Tic-Tac-Toe (Left) -->
+            <Button
+                id="btnTic"
+                width="360"
+                height="110"
+                translation="[240,0]"
+                focusable="true">
+                <Label
+                    text="Tic-Tac-Toe"
+                    horizAlign="center"
+                    vertAlign="center" />
+            </Button>
 
-			' Font sizes
-			if m.title <> invalid then m.title.font.size = 96
-			if m.hint <> invalid then m.hint.font.size = 24
+            <!-- Checkers (Right) -->
+            <Button
+                id="btnCheckers"
+                width="360"
+                height="110"
+                translation="[680,0]"
+                focusable="true">
+                <Label
+                    text="Checkers"
+                    horizAlign="center"
+                    vertAlign="center" />
+            </Button>
 
-			' Make sure buttons are focusable and set initial focus to the left button
-			if m.btnCheckers <> invalid then m.btnCheckers.focusable = true
-			if m.btnTic <> invalid then m.btnTic.focusable = true
-			if m.btnCheckers <> invalid then m.btnCheckers.setFocus(true)
-		end function
+        </Group>
 
-		' Handles the function of the keys pressed on the Roku remote
-		function onKeyEvent(key as String, press as Boolean) as Boolean
-			if not press return false
-			if key = "OK" or key = "Select" or key = "Enter" then
-				if m.btnCheckers <> invalid and m.btnCheckers.isFocused() then
-					' User selected Checkers - replace this with navigation or event
-					print "Checkers button pressed"
-					return true
-				end if
-				if m.btnTic <> invalid and m.btnTic.isFocused() then
-					print "Tic-Tac-Toe button pressed"
-					return true
-				end if
-			end if
-			return false
-		end function
-	]]></script>
-	
+        <!-- Footer Text -->
+        <Label
+            id="Stext"
+            text="Select a game using the remote"
+            width="1280"
+            height="60"
+            horizAlign="center"
+            vertAlign="bottom"
+            translation="[0,-30]" />
+
+    </children>
+
+    <script type="text/brightscript"><![CDATA[
+        function init()
+            m.top.setFocus(true)
+
+            m.title = m.top.findNode("title")
+            m.btnTic = m.top.findNode("btnTic")
+            m.btnCheckers = m.top.findNode("btnCheckers")
+            m.Stext = m.top.findNode("Stext")
+
+            ' Font sizes
+            m.title.font.size = 88
+            m.Stext.font.size = 28
+
+            ' Set initial focus to left button
+            m.btnTic.setFocus(true)
+        end function
+
+        function onKeyEvent(key as String, press as Boolean) as Boolean
+            if not press then return false
+
+            if key = "OK" then
+                if m.btnTic.isFocused() then
+                    print "Tic-Tac-Toe selected"
+                    return true
+                else if m.btnCheckers.isFocused() then
+                    print "Checkers selected"
+                    return true
+                end if
+            end if
+
+            return false
+        end function
+    ]]></script>
+
 </component>
