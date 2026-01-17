@@ -4,7 +4,7 @@
 		<!-- Big centered title -->
 		<Label
 			id="title"
-			text="Welcome to Roku!"
+			text="Welcome to Roku Hub!"
 			width="1280"
 			height="180"
 			horizAlign="center"
