@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<component name="HelloWorld" extends="Scene"> 
+<component name="TicTacToe" extends="Scene"> 
   <children>
     <Label id="info" text="Tic-Tac-Toe: Use arrows + OK" width="1280" height="80" horizAlign="center" vertAlign="top" translation="[0,20]" />
+    
+    <!-- Grid Lines -->
+    <Rectangle id="vline1" color="0xFFFFFFFF" width="4" height="440" translation="[518,140]" />
+    <Rectangle id="vline2" color="0xFFFFFFFF" width="4" height="440" translation="[738,140]" />
+    <Rectangle id="hline1" color="0xFFFFFFFF" width="640" height="4" translation="[320,258]" />
+    <Rectangle id="hline2" color="0xFFFFFFFF" width="640" height="4" translation="[320,418]" />
+    
+    <!-- Cell Highlights -->
     <Rectangle id="highlight1" color="0xFFFF00FF" width="200" height="120" translation="[320,140]" visible="false" />
     <Label id="cell1" text="" translation="[320,140]" width="200" height="120" horizAlign="center" vertAlign="center" />
     <Rectangle id="highlight2" color="0xFFFF00FF" width="200" height="120" translation="[540,140]" visible="false" />
@@ -21,5 +29,5 @@
     <Rectangle id="highlight9" color="0xFFFF00FF" width="200" height="120" translation="[760,460]" visible="false" />
     <Label id="cell9" text="" translation="[760,460]" width="200" height="120" horizAlign="center" vertAlign="center" />
   </children>
-<script type="text/brightscript" uri="helloworld.brs" />
+<script type="text/brightscript" uri="tictactoe.brs" />
 </component>
