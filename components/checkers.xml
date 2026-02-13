@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <component name="checkers" extends="Scene">
+    <!-- also this is new as of 2/12/2026-->
     <interface>
         <field id="exitGame" type="bool" value="false" />
     </interface>
