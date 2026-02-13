@@ -22,18 +22,15 @@
             height="140"
             translation="[240,300]">
             <!-- Tic-Tac-Toe -->
-            <Rectangle
-                id="btnTicBg"
-                width="360"
-                height="120"
-                translation="[0,0]"
-                color="0xCCCCCCFF" />
-            <Button
+            <Group
                 id="btnTic"
-                width="360"
-                height="120"
                 translation="[0,0]"
                 focusable="true">
+                <Rectangle
+                    id="btnTicBg"
+                    width="360"
+                    height="120"
+                    color="0x999999FF" />
                 <Label
                     text="Tic-Tac-Toe"
                     width="360"
@@ -41,22 +38,17 @@
                     horizAlign="center"
                     vertAlign="center"
                     color="0x000000FF" />
-            </Button>
+            </Group>
             <!-- Checkers -->
-            <Rectangle
-                id="btnCheckersBg"
-                width="360"
-                height="120"
-                translation="[440,0]"
-                color="0xCCCCCCFF" />
-            <Button
+            <Group
                 id="btnCheckers"
-                width="360"
-                height="120"
                 translation="[440,0]"
-                focusable="true"
-                focusBitmapUri=""
-                focusFootprintBitmapUri="">
+                focusable="true">
+                <Rectangle
+                    id="btnCheckersBg"
+                    width="360"
+                    height="120"
+                    color="0x999999FF" />
                 <Label
                     text="Checkers"
                     width="360"
@@ -64,7 +56,7 @@
                     horizAlign="center"
                     vertAlign="center"
                     color="0x000000FF" />
-            </Button>
+            </Group>
         </Group>
         <!-- Footer Text -->
         <Label
@@ -104,13 +96,14 @@
         end function
         
         function updateButtonStyles()
-            ' Update backgrounds based on focus
+            ' Both buttons start at medium grey (0x999999FF)
+            ' Focused button becomes light grey (0xDDDDDDFF)
             if m.btnTic.hasFocus() then
-                m.btnTicBg.color = "0xCCCCCCFF" ' Light grey for focused
-                m.btnCheckersBg.color = "0x666666FF" ' Dark grey for unfocused
+                m.btnTicBg.color = "0xDDDDDDFF" ' Light grey for focused
+                m.btnCheckersBg.color = "0x999999FF" ' Medium grey for unfocused
             else if m.btnCheckers.hasFocus() then
-                m.btnTicBg.color = "0x666666FF" ' Dark grey for unfocused
-                m.btnCheckersBg.color = "0xCCCCCCFF" ' Light grey for focused
+                m.btnTicBg.color = "0x999999FF" ' Medium grey for unfocused
+                m.btnCheckersBg.color = "0xDDDDDDFF" ' Light grey for focused
             end if
         end function
         
