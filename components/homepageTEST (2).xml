@@ -117,7 +117,7 @@
                     return true
                 else if m.btnCheckers.hasFocus() then
                     print "Checkers selected"
-                    launchGame("CheckersScene")
+                    launchGame("checkers")
                     return true
                 end if
             end if
