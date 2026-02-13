@@ -2,10 +2,13 @@
 <component name="HomePage2" extends="Scene">
     <children>
         <!-- Background -->
-        <Rectangle
+        <Poster
             width="1280"
             height="720"
-            color="0x5A2D82FF" />
+            uri="pkg:/images/ROKUHP.jpg"
+            loadDisplayMode="scaleToFill" />
+
+        
         <!-- Title -->
         <Label
             id="title"
