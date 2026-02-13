@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <component name="HomePage2" extends="Scene">
     <children>
-
         <!-- Background -->
         <Rectangle
             width="1280"
             height="720"
             color="0x5A2D82FF" />
-
         <!-- Title -->
         <Label
             id="title"
@@ -17,48 +15,59 @@
             horizAlign="center"
             vertAlign="top"
             translation="[0,60]" />
-
         <!-- Button Container (Centered) -->
         <Group
             id="buttonsGroup"
             width="800"
             height="140"
             translation="[240,300]">
-
             <!-- Tic-Tac-Toe -->
+            <Rectangle
+                id="btnTicBg"
+                width="360"
+                height="120"
+                translation="[0,0]"
+                color="0xCCCCCCFF" />
             <Button
                 id="btnTic"
                 width="360"
                 height="120"
                 translation="[0,0]"
-                focusable="true">
-
+                focusable="true"
+                focusBitmapUri=""
+                focusFootprintBitmapUri="">
                 <Label
                     text="Tic-Tac-Toe"
                     width="360"
                     height="120"
                     horizAlign="center"
-                    vertAlign="center" />
+                    vertAlign="center"
+                    color="0x000000FF" />
             </Button>
-
             <!-- Checkers -->
+            <Rectangle
+                id="btnCheckersBg"
+                width="360"
+                height="120"
+                translation="[440,0]"
+                color="0x666666FF" />
             <Button
                 id="btnCheckers"
                 width="360"
                 height="120"
                 translation="[440,0]"
-                focusable="true">
-
+                focusable="true"
+                focusBitmapUri=""
+                focusFootprintBitmapUri="">
                 <Label
                     text="Checkers"
                     width="360"
                     height="120"
                     horizAlign="center"
-                    vertAlign="center" />
+                    vertAlign="center"
+                    color="0x000000FF" />
             </Button>
-
         </Group>
-
         <!-- Footer Text -->
         <Label
             id="Stext"
@@ -68,41 +77,84 @@
             horizAlign="center"
             vertAlign="bottom"
             translation="[0,200]" />
-
     </children>
-
     <script type="text/brightscript"><![CDATA[
         function init()
             m.top.setFocus(true)
-
             m.title = m.top.findNode("title")
             m.btnTic = m.top.findNode("btnTic")
             m.btnCheckers = m.top.findNode("btnCheckers")
+            m.btnTicBg = m.top.findNode("btnTicBg")
+            m.btnCheckersBg = m.top.findNode("btnCheckersBg")
             m.Stext = m.top.findNode("Stext")
-
+            
             ' Font sizes
             m.title.font.size = 88
             m.Stext.font.size = 28
-
+            
+            ' Set up focus observers
+            m.btnTic.observeField("focusedChild", "onButtonFocusChange")
+            m.btnCheckers.observeField("focusedChild", "onButtonFocusChange")
+            
             ' Set initial focus
             m.btnTic.setFocus(true)
+            updateButtonStyles()
         end function
-
+        
+        function onButtonFocusChange()
+            updateButtonStyles()
+        end function
+        
+        function updateButtonStyles()
+            ' Update backgrounds based on focus
+            if m.btnTic.hasFocus() then
+                m.btnTicBg.color = "0xCCCCCCFF" ' Light grey for focused
+                m.btnCheckersBg.color = "0x666666FF" ' Dark grey for unfocused
+            else if m.btnCheckers.hasFocus() then
+                m.btnTicBg.color = "0x666666FF" ' Dark grey for unfocused
+                m.btnCheckersBg.color = "0xCCCCCCFF" ' Light grey for focused
+            end if
+        end function
+        
         function onKeyEvent(key as String, press as Boolean) as Boolean
             if not press then return false
-
+            
             if key = "OK" then
-                if m.btnTic.isFocused() then
+                if m.btnTic.hasFocus() then
                     print "Tic-Tac-Toe selected"
+                    launchGame("TicTacToeScene")
                     return true
-                else if m.btnCheckers.isFocused() then
+                else if m.btnCheckers.hasFocus() then
                     print "Checkers selected"
+                    launchGame("CheckersScene")
                     return true
                 end if
             end if
-
             return false
         end function
+        
+        function launchGame(sceneName as String)
+            ' Create the game scene
+            gameScene = CreateObject("roSGNode", sceneName)
+            
+            ' Observe when user wants to return to home
+            gameScene.observeField("exitGame", "onGameExit")
+            
+            ' Show the game scene
+            m.top.getParent().appendChild(gameScene)
+            gameScene.setFocus(true)
+            
+            ' Store reference
+            m.currentGame = gameScene
+        end function
+        
+        function onGameExit()
+            ' Remove game scene and return focus
+            if m.currentGame <> invalid then
+                m.top.getParent().removeChild(m.currentGame)
+                m.currentGame = invalid
+                m.btnTic.setFocus(true)
+            end if
+        end function
     ]]></script>
-
 </component>
