@@ -48,7 +48,7 @@
                 width="360"
                 height="120"
                 translation="[440,0]"
-                color="0x000000FF" />
+                color="0xCCCCCCFF" />
             <Button
                 id="btnCheckers"
                 width="360"
