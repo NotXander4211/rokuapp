@@ -33,7 +33,7 @@
                 width="360"
                 height="120"
                 translation="[0,0]"
-                focusable="true"
+                focusable="true">
                 <Label
                     text="Tic-Tac-Toe"
                     width="360"
