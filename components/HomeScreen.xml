@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<component name="HomeScreen" extends="Scene">
+    <children>
+        <!-- ======= MENU (visible when no game is active) ======= -->
+        <Group id="menuGroup">
+            <!-- Background -->
+            <Rectangle id="menuBg" width="1280" height="720" color="0x1A1A2EFF" />
+
+            <!-- Title -->
+            <Label id="title" text="Roku Game Hub"
+                width="1280" height="55"
+                translation="[0,15]"
+                horizAlign="center" vertAlign="center"
+                color="0xFFFFFFFF" />
+
+            <!-- Subtitle -->
+            <Label id="subtitle" text="Choose a game to play"
+                width="1280" height="25"
+                translation="[0,70]"
+                horizAlign="center" vertAlign="center"
+                color="0x8888AAFF" />
+
+            <!-- ── Tic-Tac-Toe Card ── -->
+            <Group id="cardTicTacToe" translation="[35,105]">
+                <Rectangle id="cardTicBg" width="380" height="285" color="0x252545FF" />
+                <Rectangle id="cardTicAccent" width="380" height="4" color="0x662D91FF" />
+
+                <!-- Mini tic-tac-toe grid preview -->
+                <Group translation="[150,25]">
+                    <Rectangle width="2" height="70" color="0x662D91FF" translation="[23,0]" />
+                    <Rectangle width="2" height="70" color="0x662D91FF" translation="[47,0]" />
+                    <Rectangle width="70" height="2" color="0x662D91FF" translation="[0,23]" />
+                    <Rectangle width="70" height="2" color="0x662D91FF" translation="[0,47]" />
+                </Group>
+
+                <Label id="cardTicTitle" text="Tic-Tac-Toe"
+                    width="380" height="50"
+                    translation="[0,110]"
+                    horizAlign="center" vertAlign="center"
+                    color="0xFFFFFFFF" />
+
+                <Label id="cardTicDesc" text="Classic X vs O"
+                    width="380" height="30"
+                    translation="[0,160]"
+                    horizAlign="center" vertAlign="center"
+                    color="0x8888AAFF" />
+
+                <!-- Focus border -->
+                <Rectangle id="focusTicTop"    width="380" height="3" translation="[0,0]"     color="0x00000000" />
+                <Rectangle id="focusTicBottom" width="380" height="3" translation="[0,282]"   color="0x00000000" />
+                <Rectangle id="focusTicLeft"   width="3"   height="285" translation="[0,0]"   color="0x00000000" />
+                <Rectangle id="focusTicRight"  width="3"   height="285" translation="[377,0]" color="0x00000000" />
+            </Group>
+
+            <!-- ── Checkers Card ── -->
+            <Group id="cardCheckers" translation="[450,105]">
+                <Rectangle id="cardCheckersBg" width="380" height="285" color="0x252545FF" />
+                <Rectangle id="cardCheckersAccent" width="380" height="4" color="0x662D91FF" />
+
+                <!-- Mini checkerboard preview -->
+                <Group translation="[150,25]">
+                    <Rectangle width="35" height="35" color="0xDEB887FF" translation="[0,0]" />
+                    <Rectangle width="35" height="35" color="0x8B4513FF" translation="[35,0]" />
+                    <Rectangle width="35" height="35" color="0x8B4513FF" translation="[0,35]" />
+                    <Rectangle width="35" height="35" color="0xDEB887FF" translation="[35,35]" />
+                    <Poster uri="pkg:/images/white_checker.png" width="22" height="22" translation="[41,6]" />
+                    <Poster uri="pkg:/images/purple_checker.png" width="22" height="22" translation="[6,41]" />
+                </Group>
+
+                <Label id="cardCheckersTitle" text="Checkers"
+                    width="380" height="50"
+                    translation="[0,110]"
+                    horizAlign="center" vertAlign="center"
+                    color="0xFFFFFFFF" />
+
+                <Label id="cardCheckersDesc" text="Strategy board game"
+                    width="380" height="30"
+                    translation="[0,160]"
+                    horizAlign="center" vertAlign="center"
+                    color="0x8888AAFF" />
+
+                <!-- Focus border -->
+                <Rectangle id="focusCheckersTop"    width="380" height="3" translation="[0,0]"     color="0x00000000" />
+                <Rectangle id="focusCheckersBottom" width="380" height="3" translation="[0,282]"   color="0x00000000" />
+                <Rectangle id="focusCheckersLeft"   width="3"   height="285" translation="[0,0]"   color="0x00000000" />
+                <Rectangle id="focusCheckersRight"  width="3"   height="285" translation="[377,0]" color="0x00000000" />
+            </Group>
+
+            <!-- ── Connect 4 Card ── -->
+            <Group id="cardConnect4" translation="[865,105]">
+                <Rectangle id="cardConnect4Bg" width="380" height="285" color="0x252545FF" />
+                <Rectangle id="cardConnect4Accent" width="380" height="4" color="0x662D91FF" />
+
+                <!-- Mini connect 4 preview -->
+                <Group translation="[150,25]">
+                    <Rectangle width="70" height="70" color="0x111133FF" translation="[0,0]" />
+                    <!-- Red piece -->
+                    <Rectangle width="20" height="20" color="0xFF0000FF" translation="[10,10]" />
+                    <!-- Yellow piece -->
+                    <Rectangle width="20" height="20" color="0xFFFF00FF" translation="[40,40]" />
+                </Group>
+
+                <Label id="cardConnect4Title" text="Connect 4"
+                    width="380" height="50"
+                    translation="[0,110]"
+                    horizAlign="center" vertAlign="center"
+                    color="0xFFFFFFFF" />
+
+                <Label id="cardConnect4Desc" text="Connect four in a row"
+                    width="380" height="30"
+                    translation="[0,160]"
+                    horizAlign="center" vertAlign="center"
+                    color="0x8888AAFF" />
+
+                <!-- Focus border -->
+                <Rectangle id="focusConnect4Top"    width="380" height="3" translation="[0,0]"     color="0x00000000" />
+                <Rectangle id="focusConnect4Bottom" width="380" height="3" translation="[0,282]"   color="0x00000000" />
+                <Rectangle id="focusConnect4Left"   width="3"   height="285" translation="[0,0]"   color="0x00000000" />
+                <Rectangle id="focusConnect4Right"  width="3"   height="285" translation="[377,0]" color="0x00000000" />
+            </Group>
+
+            <!-- ── Theme Selector Row ── -->
+            <Group id="themeSelectorGroup" translation="[340,415]">
+                <Rectangle id="themeSelectorBg" width="600" height="48" color="0x252545FF" />
+                <Label id="themeSelectorLabel" text="Theme:"
+                    width="110" height="48" translation="[15,0]"
+                    horizAlign="left" vertAlign="center"
+                    color="0x8888AAFF" />
+                <Label id="themeArrowL" text="&lt;"
+                    width="30" height="48" translation="[180,0]"
+                    horizAlign="center" vertAlign="center"
+                    color="0x8888AAFF" />
+                <Label id="themeValueLabel" text="Roku"
+                    width="200" height="48" translation="[210,0]"
+                    horizAlign="center" vertAlign="center"
+                    color="0xFFFFFFFF" />
+                <Label id="themeArrowR" text="&gt;"
+                    width="30" height="48" translation="[410,0]"
+                    horizAlign="center" vertAlign="center"
+                    color="0x8888AAFF" />
+                <Rectangle id="themeBorderTop"   width="600" height="2" translation="[0,0]"   color="0x00000000" />
+                <Rectangle id="themeBorderBot"   width="600" height="2" translation="[0,46]"  color="0x00000000" />
+                <Rectangle id="themeBorderLeft"  width="2" height="48"  translation="[0,0]"   color="0x00000000" />
+                <Rectangle id="themeBorderRight" width="2" height="48"  translation="[598,0]" color="0x00000000" />
+            </Group>
+
+            <!-- ── Win Effect Selector Row ── -->
+            <Group id="effectSelectorGroup" translation="[340,472]">
+                <Rectangle id="effectSelectorBg" width="600" height="48" color="0x252545FF" />
+                <Label id="effectSelectorLabel" text="Win Effect:"
+                    width="140" height="48" translation="[15,0]"
+                    horizAlign="left" vertAlign="center"
+                    color="0x8888AAFF" />
+                <Label id="effectArrowL" text="&lt;"
+                    width="30" height="48" translation="[180,0]"
+                    horizAlign="center" vertAlign="center"
+                    color="0x8888AAFF" />
+                <Label id="effectValueLabel" text="Confetti"
+                    width="200" height="48" translation="[210,0]"
+                    horizAlign="center" vertAlign="center"
+                    color="0xFFFFFFFF" />
+                <Label id="effectArrowR" text="&gt;"
+                    width="30" height="48" translation="[410,0]"
+                    horizAlign="center" vertAlign="center"
+                    color="0x8888AAFF" />
+                <Rectangle id="effectBorderTop"   width="600" height="2" translation="[0,0]"   color="0x00000000" />
+                <Rectangle id="effectBorderBot"   width="600" height="2" translation="[0,46]"  color="0x00000000" />
+                <Rectangle id="effectBorderLeft"  width="2" height="48"  translation="[0,0]"   color="0x00000000" />
+                <Rectangle id="effectBorderRight" width="2" height="48"  translation="[598,0]" color="0x00000000" />
+            </Group>
+
+            <!-- Divider -->
+            <Rectangle id="menuDivider" width="800" height="1" translation="[240,540]" color="0x333355FF" />
+
+            <!-- Footer -->
+            <Label id="footer"
+                text="UP/DOWN Navigate  |  LEFT/RIGHT Browse  |  OK to Play"
+                width="1280" height="25"
+                translation="[0,555]"
+                horizAlign="center" vertAlign="center"
+                color="0x555577FF" />
+        </Group>
+
+        <!-- ======= GAME CONTAINER ======= -->
+        <Group id="gameContainer" visible="false" />
+    </children>
+
+    <script type="text/brightscript" uri="HomeScreen.brs" />
+</component>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<component name="CheckersGame" extends="Group">
+    <interface>
+        <field id="exitGame"  type="bool"       value="false" />
+        <field id="themeData" type="assocarray"  onChange="onThemeChanged" />
+        <field id="winEffect" type="string"      value="Confetti" />
+    </interface>
+    <children>
+        <!-- Background -->
+        <Rectangle id="gameBg" width="1280" height="720" color="0x1A1A2EFF" />
+
+        <!-- Title -->
+        <Label id="gameTitle" text="Checkers"
+            width="1280" height="50"
+            translation="[0,5]"
+            horizAlign="center" vertAlign="center"
+            color="0xFFFFFFFF" />
+
+        <!-- Board + pieces share coordinates inside boardContainer -->
+        <Group id="boardContainer" translation="[340,58]">
+            <Group id="boardGroup" />
+            <Group id="piecesGroup" />
+            <!-- Selection highlight -->
+            <Rectangle id="selection" width="75" height="75" color="0x00FF0066" visible="false" />
+            <!-- Cursor highlight -->
+            <Rectangle id="cursor" width="75" height="75" color="0xFFD70066" />
+        </Group>
+
+        <!-- Status bar -->
+        <Label id="info" text=""
+            width="1280" height="35"
+            translation="[0,680]"
+            horizAlign="center" vertAlign="center"
+            color="0xBBBBBBFF" />
+
+        <!-- Win effect layers -->
+        <Group id="confettiGroup" visible="false" />
+        <Group id="crownGroup"    visible="false" />
+    </children>
+
+    <script type="text/brightscript" uri="CheckersGame.brs" />
+</component>
