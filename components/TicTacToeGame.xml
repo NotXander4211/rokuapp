@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<component name="TicTacToeGame" extends="Group">
+    <interface>
+        <field id="exitGame"  type="bool"       value="false" />
+        <field id="themeData" type="assocarray"  onChange="onThemeChanged" />
+        <field id="winEffect" type="string"      value="Confetti" />
+    </interface>
+    <children>
+        <!-- Background -->
+        <Rectangle id="gameBg" width="1280" height="720" color="0x1A1A2EFF" />
+
+        <!-- Header -->
+        <Label id="info"
+            text="Tic-Tac-Toe  |  Arrows + OK  |  BACK = Home"
+            width="1280" height="60"
+            horizAlign="center" vertAlign="center"
+            translation="[0,15]"
+            color="0xFFFFFFFF" />
+
+        <!-- Grid lines -->
+        <Rectangle id="gridV1" color="0x555577FF" width="4"   height="450" translation="[533,140]" />
+        <Rectangle id="gridV2" color="0x555577FF" width="4"   height="450" translation="[750,140]" />
+        <Rectangle id="gridH1" color="0x555577FF" width="650" height="4"   translation="[320,290]" />
+        <Rectangle id="gridH2" color="0x555577FF" width="650" height="4"   translation="[320,440]" />
+
+        <!-- Row 1 -->
+        <Group id="highlight1" translation="[320,140]" visible="false">
+            <Rectangle color="0xFFDD00FF" width="213" height="4"   translation="[0,0]" />
+            <Rectangle color="0xFFDD00FF" width="213" height="4"   translation="[0,146]" />
+            <Rectangle color="0xFFDD00FF" width="4"   height="150" translation="[0,0]" />
+            <Rectangle color="0xFFDD00FF" width="4"   height="150" translation="[209,0]" />
+        </Group>
+        <Label id="cell1" text="" translation="[320,140]" width="213" height="150"
+            horizAlign="center" vertAlign="center" color="0xFFFFFFFF" />
+
+        <Group id="highlight2" translation="[537,140]" visible="false">
+            <Rectangle color="0xFFDD00FF" width="217" height="4"   translation="[0,0]" />
+            <Rectangle color="0xFFDD00FF" width="217" height="4"   translation="[0,146]" />
+            <Rectangle color="0xFFDD00FF" width="4"   height="150" translation="[0,0]" />
+            <Rectangle color="0xFFDD00FF" width="4"   height="150" translation="[213,0]" />
+        </Group>
+        <Label id="cell2" text="" translation="[537,140]" width="217" height="150"
+            horizAlign="center" vertAlign="center" color="0xFFFFFFFF" />
+
+        <Group id="highlight3" translation="[754,140]" visible="false">
+            <Rectangle color="0xFFDD00FF" width="216" height="4"   translation="[0,0]" />
+            <Rectangle color="0xFFDD00FF" width="216" height="4"   translation="[0,146]" />
+            <Rectangle color="0xFFDD00FF" width="4"   height="150" translation="[0,0]" />
+            <Rectangle color="0xFFDD00FF" width="4"   height="150" translation="[212,0]" />
+        </Group>
+        <Label id="cell3" text="" translation="[754,140]" width="216" height="150"
+            horizAlign="center" vertAlign="center" color="0xFFFFFFFF" />
+
+        <!-- Row 2 -->
+        <Group id="highlight4" translation="[320,294]" visible="false">
+            <Rectangle color="0xFFDD00FF" width="213" height="4"   translation="[0,0]" />
+            <Rectangle color="0xFFDD00FF" width="213" height="4"   translation="[0,146]" />
+            <Rectangle color="0xFFDD00FF" width="4"   height="150" translation="[0,0]" />
+            <Rectangle color="0xFFDD00FF" width="4"   height="150" translation="[209,0]" />
+        </Group>
+        <Label id="cell4" text="" translation="[320,294]" width="213" height="150"
+            horizAlign="center" vertAlign="center" color="0xFFFFFFFF" />
+
+        <Group id="highlight5" translation="[537,294]" visible="false">
+            <Rectangle color="0xFFDD00FF" width="217" height="4"   translation="[0,0]" />
+            <Rectangle color="0xFFDD00FF" width="217" height="4"   translation="[0,146]" />
+            <Rectangle color="0xFFDD00FF" width="4"   height="150" translation="[0,0]" />
+            <Rectangle color="0xFFDD00FF" width="4"   height="150" translation="[213,0]" />
+        </Group>
+        <Label id="cell5" text="" translation="[537,294]" width="217" height="150"
+            horizAlign="center" vertAlign="center" color="0xFFFFFFFF" />
+
+        <Group id="highlight6" translation="[754,294]" visible="false">
+            <Rectangle color="0xFFDD00FF" width="216" height="4"   translation="[0,0]" />
+            <Rectangle color="0xFFDD00FF" width="216" height="4"   translation="[0,146]" />
+            <Rectangle color="0xFFDD00FF" width="4"   height="150" translation="[0,0]" />
+            <Rectangle color="0xFFDD00FF" width="4"   height="150" translation="[212,0]" />
+        </Group>
+        <Label id="cell6" text="" translation="[754,294]" width="216" height="150"
+            horizAlign="center" vertAlign="center" color="0xFFFFFFFF" />
+
+        <!-- Row 3 -->
+        <Group id="highlight7" translation="[320,444]" visible="false">
+            <Rectangle color="0xFFDD00FF" width="213" height="4"   translation="[0,0]" />
+            <Rectangle color="0xFFDD00FF" width="213" height="4"   translation="[0,142]" />
+            <Rectangle color="0xFFDD00FF" width="4"   height="146" translation="[0,0]" />
+            <Rectangle color="0xFFDD00FF" width="4"   height="146" translation="[209,0]" />
+        </Group>
+        <Label id="cell7" text="" translation="[320,444]" width="213" height="146"
+            horizAlign="center" vertAlign="center" color="0xFFFFFFFF" />
+
+        <Group id="highlight8" translation="[537,444]" visible="false">
+            <Rectangle color="0xFFDD00FF" width="217" height="4"   translation="[0,0]" />
+            <Rectangle color="0xFFDD00FF" width="217" height="4"   translation="[0,142]" />
+            <Rectangle color="0xFFDD00FF" width="4"   height="146" translation="[0,0]" />
+            <Rectangle color="0xFFDD00FF" width="4"   height="146" translation="[213,0]" />
+        </Group>
+        <Label id="cell8" text="" translation="[537,444]" width="217" height="146"
+            horizAlign="center" vertAlign="center" color="0xFFFFFFFF" />
+
+        <Group id="highlight9" translation="[754,444]" visible="false">
+            <Rectangle color="0xFFDD00FF" width="216" height="4"   translation="[0,0]" />
+            <Rectangle color="0xFFDD00FF" width="216" height="4"   translation="[0,142]" />
+            <Rectangle color="0xFFDD00FF" width="4"   height="146" translation="[0,0]" />
+            <Rectangle color="0xFFDD00FF" width="4"   height="146" translation="[212,0]" />
+        </Group>
+        <Label id="cell9" text="" translation="[754,444]" width="216" height="146"
+            horizAlign="center" vertAlign="center" color="0xFFFFFFFF" />
+
+        <!-- Win line (animated) -->
+        <Rectangle id="winLine" color="0x00FF00FF" width="10" height="10"
+            translation="[0,0]" visible="false" />
+        <Animation id="winAnimation" duration="1" repeat="true" easeFunction="linear">
+            <Vector2DFieldInterpolator id="winLineAnim"
+                key="[0.0, 0.5, 1.0]"
+                keyValue="[[0,0], [0,0], [0,0]]"
+                fieldToInterp="winLine.scale" />
+        </Animation>
+
+        <!-- Win effect layers -->
+        <Group id="confettiGroup" visible="false" />
+        <Group id="crownGroup"    visible="false" />
+    </children>
+
+    <script type="text/brightscript" uri="TicTacToeGame.brs" />
+</component>

@@ -1,0 +1,27 @@
+#
+#  Game Hub - Roku Channel
+#  Combined app with Tic-Tac-Toe and Checkers
+#
+
+##   Channel Details
+title=Roku Game Hub
+major_version=1
+minor_version=0
+build_version=00001
+
+##   Channel Assets
+###  Main Menu Icons / Channel Poster Artwork
+#### Image sizes are FHD: 540x405px | HD: 290x218px | SD: 214x144px
+mm_icon_focus_fhd=pkg:/images/ROKUHP.jpg
+mm_icon_focus_hd=pkg:/images/ROKUHP.jpg
+mm_icon_focus_sd=pkg:/images/ROKUHP.jpg
+
+###  Splash Screen + Loading Screen Artwork
+#### Image sizes are FHD: 1920x1080px | HD: 1280x720px | SD: 720x480px
+splash_screen_fhd=pkg:/images/ROKUHP.jpg
+splash_screen_hd=pkg:/images/ROKUHP.jpg
+splash_screen_sd=pkg:/images/ROKUHP.jpg
+
+
+splash_color=#1A1A2E
+splash_min_time=1

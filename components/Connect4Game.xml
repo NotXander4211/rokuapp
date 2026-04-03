@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<component name="Connect4Game" extends="Group">
+    <interface>
+        <field id="themeData" type="assocarray" onChange="onThemeChanged" />
+        <field id="winEffect" type="string" value="Confetti" />
+        <field id="exitGame" type="bool" value="false" alwaysNotify="true" />
+    </interface>
+
+    <script type="text/brightscript" uri="Connect4Game.brs" />
+
+    <children>
+        <Rectangle id="gameBg" width="1280" height="720" color="0x1A1A2EFF" />
+
+        <!-- ── Title / Status ── -->
+        <Label id="info" text=""
+            width="1280" height="60" translation="[0,20]"
+            horizAlign="center" vertAlign="center"
+            color="0xFFFFFFFF" />
+
+        <!-- ── Board ── -->
+        <!-- Center roughly: width is 7*80 = 560. 1280/2 - 280 = 360 -->
+        <!-- height is 6*80 = 480. 720/2 - 240 = 120 -->
+        <Group id="boardGroup" translation="[360,120]">
+            <!-- Board background (blueish in Connect4 typically, but we use theming) -->
+            <Rectangle id="boardBg" width="560" height="480" color="0x3333A0FF" />
+
+            <!-- Cells -->
+            <Group id="cellsGroup" />
+        </Group>
+
+        <!-- Cursor to show which column is selected -->
+        <!-- Translates above the board. y = 90 -->
+        <Group id="cursorGroup" translation="[360,85]">
+            <Rectangle id="cursorIcon" width="80" height="30" color="0xFFDD00FF" />
+        </Group>
+
+        <!-- ── Win Effects ── -->
+        <Label id="winLabel" text="Winner!" visible="false"
+            width="1280" height="80" translation="[0,620]"
+            horizAlign="center" vertAlign="center"
+            color="0x00FF00FF" />
+
+        <Group id="confettiGroup" />
+        <Group id="crownGroup" visible="false" />
+
+        <!-- Footer -->
+        <Label id="footer" text="LEFT/RIGHT to move  |  OK to drop  |  BACK to exit"
+            width="1280" height="30" translation="[0,680]"
+            horizAlign="center" vertAlign="center"
+            color="0x8888AAFF" />
+    </children>
+</component>
