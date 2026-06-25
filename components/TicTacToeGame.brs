@@ -17,6 +17,8 @@ function init()
     m.info          = m.top.findNode("info")
     m.winLine       = m.top.findNode("winLine")
     m.winAnimation  = m.top.findNode("winAnimation")
+    m.winDiag       = m.top.findNode("winDiag")
+    clearDiagonalLine()
     m.confettiGroup = m.top.findNode("confettiGroup")
     m.crownGroup    = m.top.findNode("crownGroup")
 
@@ -32,7 +34,7 @@ function init()
     m.themeHighlight = "0xFFDD00FF"
     m.themePlayer1  = "0xFF6666FF"
     m.themePlayer2  = "0x6688FFFF"
-    m.themeGridLine = "0x555577FF"
+    m.themeGridLine = "0x662D91FF"
     m.themeWinColor = "0x00FF00FF"
     m.themeAccent   = "0x662D91FF"
 
@@ -58,10 +60,16 @@ function init()
 
     ' ── Style cells ──
     for i = 0 to 8
-        m.cells[i].font.size = 72
-        m.cells[i].color     = m.themeText
+        m.cells[i].font  = NewFont("pkg:/fonts/Audiowide-Regular.ttf", 72)
+        m.cells[i].color = m.themeText
     end for
-    m.info.font.size = 24
+    m.info.font = NewFont("pkg:/fonts/ChakraPetch-Regular.ttf", 24)
+
+    ' Set default grid line color
+    m.gridV1.color = m.themeGridLine
+    m.gridV2.color = m.themeGridLine
+    m.gridH1.color = m.themeGridLine
+    m.gridH2.color = m.themeGridLine
 
     updateHighlight()
 end function
@@ -298,32 +306,33 @@ sub playWinAnimation()
     endY   = endPos[1]   + endSize[1]   / 2
 
     m.winLine.color = m.themeWinColor
+    thickness = 8
 
-    if startIdx = endIdx - 2 and startIdx mod 3 = 0
-        ' Horizontal
+    if startIdx mod 3 = 0 and endIdx = startIdx + 2
+        ' Horizontal (rows 0-2, 3-5, 6-8)
+        clearDiagonalLine()
+        m.winLine.rotation    = 0
         m.winLine.width       = 650
-        m.winLine.height      = 8
-        m.winLine.translation = [320, startY - 4]
-    else if startIdx < 3 and endIdx > 5
-        ' Vertical
-        m.winLine.width       = 8
+        m.winLine.height      = thickness
+        m.winLine.translation = [320, startY - thickness / 2]
+        m.winLine.visible     = true
+    else if endIdx - startIdx = 6
+        ' Vertical (columns: 0-3-6, 1-4-7, 2-5-8)
+        clearDiagonalLine()
+        m.winLine.rotation    = 0
+        m.winLine.width       = thickness
         m.winLine.height      = 450
-        m.winLine.translation = [startX - 4, 140]
-    else if startIdx = 0 and endIdx = 8
-        ' Diagonal
-        m.winLine.width       = 8
-        m.winLine.height      = 500
-        m.winLine.translation = [640, 90]
-        m.winLine.rotation    = 0.637
-    else if startIdx = 2 and endIdx = 6
-        ' Anti-diagonal
-        m.winLine.width       = 8
-        m.winLine.height      = 500
-        m.winLine.translation = [640, 90]
-        m.winLine.rotation    = -0.637
+        m.winLine.translation = [startX - thickness / 2, 140]
+        m.winLine.visible     = true
+    else
+        ' Diagonal (\ for [0,4,8] or / for [2,4,6]).
+        ' Drawn as a chain of small squares from the first winning cell's
+        ' center to the last cell's center, so it slants correctly without
+        ' relying on a rotation transform.
+        m.winLine.visible = false
+        drawDiagonalLine(startX, startY, endX, endY)
     end if
 
-    m.winLine.visible      = true
     m.winAnimation.control = "start"
 
     ' Highlight winning cells with accent colour
@@ -509,7 +518,7 @@ sub showCrownEffect()
     winLabel.horizAlign   = "center"
     winLabel.vertAlign    = "center"
     winLabel.color        = "0xB8860BFF"
-    winLabel.font.size    = 36
+    winLabel.font         = NewFont("pkg:/fonts/Audiowide-Regular.ttf", 36)
     m.crownGroup.appendChild(winLabel)
 end sub
 
@@ -529,6 +538,8 @@ sub cleanupEffects()
         m.crownGroup.removeChildIndex(0)
     end while
     m.crownGroup.visible = false
+
+    clearDiagonalLine()
 end sub
 
 ' ────────────────────────────────────────────────────────────
@@ -542,5 +553,54 @@ sub resetGame()
     init()
     if savedTheme <> invalid
         m.top.themeData = savedTheme
+        onThemeChanged()
     end if
+end sub
+
+' ────────────────────────────────────────────────────────────
+'  Build a Font node from a packaged TrueType file + size.
+' ────────────────────────────────────────────────────────────
+function NewFont(uri as string, size as integer) as object
+    f = createObject("roSGNode", "Font")
+    f.uri  = uri
+    f.size = size
+    return f
+end function
+
+' ────────────────────────────────────────────────────────────
+'  Diagonal win line, drawn as overlapping squares from
+'  (startX,startY) to (endX,endY). Axis-aligned squares only, so
+'  positioning is exact regardless of angle.
+' ────────────────────────────────────────────────────────────
+sub drawDiagonalLine(startX as Float, startY as Float, endX as Float, endY as Float)
+    clearDiagonalLine()
+
+    segSize = 10                       ' square size (line thickness)
+    dx   = endX - startX
+    dy   = endY - startY
+    dist = Sqr(dx * dx + dy * dy)
+
+    steps = Int(dist / 4)              ' spacing ~4px so squares overlap
+    if steps < 1 then steps = 1
+
+    for i = 0 to steps
+        f  = i / steps                 ' 0.0 → 1.0 along the line
+        cx = startX + dx * f
+        cy = startY + dy * f
+        seg = m.winDiag.createChild("Rectangle")
+        seg.width       = segSize
+        seg.height      = segSize
+        seg.color       = m.themeWinColor
+        seg.translation = [cx - segSize / 2, cy - segSize / 2]
+    end for
+
+    m.winDiag.visible = true
+end sub
+
+sub clearDiagonalLine()
+    if m.winDiag = invalid then return
+    while m.winDiag.getChildCount() > 0
+        m.winDiag.removeChildIndex(0)
+    end while
+    m.winDiag.visible = false
 end sub
