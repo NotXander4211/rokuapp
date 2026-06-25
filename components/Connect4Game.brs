@@ -19,14 +19,14 @@ function init()
 
     ' Default theme / palette (forced purple/teal)
     m.themeText      = "0xFFFFFFFF"
-    m.themePlayer1   = "0x7E57C2FF" ' purple
-    m.themePlayer2   = "0x26A69AFF" ' teal
+    m.themePlayer1   = "0x007EA7FF" ' dark blue
+    m.themePlayer2   = "0x80CED7FF" ' light blue
     m.themeBg        = "0x1A1A2EFF"
     m.themeBoard     = "0x3333A0FF"
     m.themeHighlight = "0xFFDD00FF"
     m.themeWinColor  = "0x00FF00FF"
-    m.player1Name  = "Purple"
-    m.player2Name  = "Teal"
+    m.player1Name  = "Dark Blue"
+    m.player2Name  = "Light Blue"
 
     ' Profile defaults
     m.devMode      = false
@@ -34,8 +34,9 @@ function init()
     m.p2Effect     = "Confetti"
     m.winnerEffect = "Confetti"
 
-    m.info.font.size     = 36
-    m.winLabel.font.size = 48
+    m.info.font     = NewFont("pkg:/fonts/Audiowide-Regular.ttf", 36)
+    m.winLabel.font = NewFont("pkg:/fonts/Audiowide-Regular.ttf", 48)
+    m.top.findNode("footer").font = NewFont("pkg:/fonts/ChakraPetch-Regular.ttf", 18)
 
     ' Game State
     m.cols = 7
@@ -105,10 +106,10 @@ sub onThemeChanged()
         m.p1Effect     = theme.p1.effect
         m.p2Effect     = theme.p2.effect
     else
-        m.player1Name  = "Purple"
-        m.player2Name  = "Teal"
-        m.themePlayer1 = "0x7E57C2FF"
-        m.themePlayer2 = "0x26A69AFF"
+        m.player1Name  = "Dark Blue"
+        m.player2Name  = "Light Blue"
+        m.themePlayer1 = "0x007EA7FF"
+        m.themePlayer2 = "0x80CED7FF"
         m.p1Effect     = m.top.winEffect
         m.p2Effect     = m.top.winEffect
     end if
@@ -170,9 +171,11 @@ sub updateInfo()
     if m.turn = 1
         m.info.text = m.player1Name + "'s Turn"
         m.info.color = m.themePlayer1
+        m.cursorIcon.color = m.themePlayer1
     else
         m.info.text = m.player2Name + "'s Turn"
         m.info.color = m.themePlayer2
+        m.cursorIcon.color = m.themePlayer2
     end if
 end sub
 
@@ -558,7 +561,7 @@ sub showCrownEffect()
     winLabel.horizAlign   = "center"
     winLabel.vertAlign    = "center"
     winLabel.color        = "0xB8860BFF"
-    winLabel.font.size    = 36
+    winLabel.font         = NewFont("pkg:/fonts/Audiowide-Regular.ttf", 36)
     m.crownGroup.appendChild(winLabel)
 end sub
 
@@ -588,3 +591,13 @@ sub cleanupEffects()
     end while
     m.crownGroup.visible = false
 end sub
+
+' ────────────────────────────────────────────────────────────
+'  Build a Font node from a packaged TrueType file + size.
+' ────────────────────────────────────────────────────────────
+function NewFont(uri as string, size as integer) as object
+    f = createObject("roSGNode", "Font")
+    f.uri  = uri
+    f.size = size
+    return f
+end function

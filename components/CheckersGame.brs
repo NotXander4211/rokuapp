@@ -1,6 +1,7 @@
 ' ================================================================
 '  Checkers game component
-'  Uses image-based pieces, themed colours, and win effects.
+'  Pieces are drawn as themed vector discs (no image files), so
+'  they follow the Roku / Dark / Light player colours.
 ' ================================================================
 
 function init()
@@ -23,8 +24,8 @@ function init()
     m.PIECE_SIZE = m.CELL - 2 * m.PAD
 
     ' ── Fonts ──
-    m.gameTitle.font.size = 36
-    m.info.font.size      = 20
+    m.gameTitle.font = NewFont("pkg:/fonts/Audiowide-Regular.ttf", 36)
+    m.info.font      = NewFont("pkg:/fonts/ChakraPetch-Regular.ttf", 20)
 
     ' ── Default theme colours (Roku) ──
     m.themeBg         = "0x1A1A2EFF"
@@ -36,6 +37,8 @@ function init()
     m.themeSelection  = "0x00FF0066"
     m.themeAccent     = "0x662D91FF"
     m.themeWinColor   = "0x00FF00FF"
+    m.themePlayer1    = "0xFF6666FF"   ' overridden per theme in onThemeChanged
+    m.themePlayer2    = "0x6688FFFF"
 
     ' ── Board state ──
     '   0 = empty
@@ -69,8 +72,8 @@ function init()
 
     ' Profile defaults (overridden by onThemeChanged when devMode is on)
     m.devMode      = false
-    m.p1Name       = "White"
-    m.p2Name       = "Purple"
+    m.p1Name       = "Player 1"
+    m.p2Name       = "Player 2"
     m.p1Effect     = "Confetti"
     m.p2Effect     = "Confetti"
     m.winnerEffect = "Confetti"
@@ -99,18 +102,22 @@ sub onThemeChanged()
     m.themeAccent     = theme.accent
     m.themeWinColor   = theme.winColor
 
-    ' Dev mode: use profile names/effects; piece images are fixed so colors don't apply
+    ' Dev mode: use profile names/colours/effects; otherwise theme defaults
     m.devMode = (theme.devMode = true)
     if m.devMode
-        m.p1Name   = theme.p1.name
-        m.p2Name   = theme.p2.name
-        m.p1Effect = theme.p1.effect
-        m.p2Effect = theme.p2.effect
+        m.p1Name       = theme.p1.name
+        m.p2Name       = theme.p2.name
+        m.themePlayer1 = theme.p1.color
+        m.themePlayer2 = theme.p2.color
+        m.p1Effect     = theme.p1.effect
+        m.p2Effect     = theme.p2.effect
     else
-        m.p1Name   = "White"
-        m.p2Name   = "Purple"
-        m.p1Effect = m.top.winEffect
-        m.p2Effect = m.top.winEffect
+        m.p1Name       = "Player 1"
+        m.p2Name       = "Player 2"
+        m.themePlayer1 = theme.player1
+        m.themePlayer2 = theme.player2
+        m.p1Effect     = m.top.winEffect
+        m.p2Effect     = m.top.winEffect
     end if
 
     ' Apply to existing nodes
@@ -189,23 +196,103 @@ sub refreshPieces()
 end sub
 
 sub addPieceNode(r as Integer, c as Integer, piece as Integer)
-    node        = CreateObject("roSGNode", "Poster")
-    node.width  = m.PIECE_SIZE
-    node.height = m.PIECE_SIZE
-    node.translation = [c * m.CELL + m.PAD, r * m.CELL + m.PAD]
+    cx     = c * m.CELL + m.CELL / 2
+    cy     = r * m.CELL + m.CELL / 2
+    radius = m.PIECE_SIZE / 2
 
-    if piece = 1
-        node.uri = "pkg:/images/white_checker.png"
-    else if piece = 2
-        node.uri = "pkg:/images/white_checker_king.png"
-    else if piece = 3
-        node.uri = "pkg:/images/purple_checker.png"
-    else if piece = 4
-        node.uri = "pkg:/images/purple_checker_king.png"
+    if piece = 1 or piece = 2
+        fill = m.themePlayer1
+    else
+        fill = m.themePlayer2
     end if
+    rim = shade(fill, 0.55)        ' darker rim for depth + edge contrast
 
-    m.piecesGroup.appendChild(node)
+    ' Rim disc, then a slightly smaller face disc so the rim reads as a ring.
+    drawDisc(cx, cy, radius, rim)
+    drawDisc(cx, cy, radius - 4, fill)
+    ' Inner ridge ring, the classic checker detail.
+    drawDisc(cx, cy, radius - 9, rim)
+    drawDisc(cx, cy, radius - 12, fill)
+
+    ' Kings get a gold crown.
+    if piece = 2 or piece = 4
+        drawKingCrown(cx, cy)
+    end if
 end sub
+
+' Draw a filled circle as a stack of horizontal bars (Roku SceneGraph has
+' no circle primitive). barH trades smoothness against node count.
+sub drawDisc(cx as Float, cy as Float, radius as Float, color as String)
+    if radius <= 0 then return
+    barH = 4
+    n = Int((radius * 2) / barH)
+    if n < 1 then n = 1
+    for i = 0 to n
+        topY = -radius + i * barH
+        midY = topY + barH / 2
+        if midY > radius then midY = radius
+        if midY < -radius then midY = -radius
+        d = radius * radius - midY * midY
+        if d < 0 then d = 0
+        halfW = Sqr(d)
+        if halfW > 0.5
+            bar = m.piecesGroup.createChild("Rectangle")
+            bar.width       = halfW * 2
+            bar.height      = barH
+            bar.color       = color
+            bar.translation = [cx - halfW, cy + topY]
+        end if
+    end for
+end sub
+
+' Small gold crown centered on a king piece.
+sub drawKingCrown(cx as Float, cy as Float)
+    gold = "0xFFD700FF"
+    addPieceRect(cx - 12, cy + 3, 24, 5,  gold)   ' base band
+    addPieceRect(cx - 12, cy - 6, 6,  11, gold)   ' left point
+    addPieceRect(cx - 3,  cy - 9, 6,  14, gold)   ' center point
+    addPieceRect(cx + 6,  cy - 6, 6,  11, gold)   ' right point
+end sub
+
+sub addPieceRect(x as Float, y as Float, w as Float, h as Float, color as String)
+    rect = m.piecesGroup.createChild("Rectangle")
+    rect.width       = w
+    rect.height      = h
+    rect.color       = color
+    rect.translation = [x, y]
+end sub
+
+' Multiply a "0xRRGGBBAA" colour's RGB by factor (keeps alpha at FF).
+function shade(hex as String, factor as Float) as String
+    rr = clampByte(hexToInt(Mid(hex, 3, 2)) * factor)
+    gg = clampByte(hexToInt(Mid(hex, 5, 2)) * factor)
+    bb = clampByte(hexToInt(Mid(hex, 7, 2)) * factor)
+    return "0x" + toHex2(rr) + toHex2(gg) + toHex2(bb) + "FF"
+end function
+
+function hexToInt(h as String) as Integer
+    digits = "0123456789ABCDEF"
+    h = UCase(h)
+    val = 0
+    for i = 1 to Len(h)
+        idx = Instr(1, digits, Mid(h, i, 1)) - 1
+        if idx < 0 then idx = 0
+        val = val * 16 + idx
+    end for
+    return val
+end function
+
+function toHex2(n as Integer) as String
+    digits = "0123456789ABCDEF"
+    return Mid(digits, (n \ 16) + 1, 1) + Mid(digits, (n mod 16) + 1, 1)
+end function
+
+function clampByte(x as Float) as Integer
+    n = Int(x)
+    if n < 0 then n = 0
+    if n > 255 then n = 255
+    return n
+end function
 
 ' ────────────────────────────────────────────────────────────
 '  Cursor helpers
@@ -693,7 +780,7 @@ sub showCrownEffect()
     winLabel.horizAlign   = "center"
     winLabel.vertAlign    = "center"
     winLabel.color        = "0xB8860BFF"
-    winLabel.font.size    = 36
+    winLabel.font         = NewFont("pkg:/fonts/Audiowide-Regular.ttf", 36)
     m.crownGroup.appendChild(winLabel)
 end sub
 
@@ -721,4 +808,14 @@ end sub
 function iAbs(n as Integer) as Integer
     if n < 0 then return -n
     return n
+end function
+
+' ────────────────────────────────────────────────────────────
+'  Build a Font node from a packaged TrueType file + size.
+' ────────────────────────────────────────────────────────────
+function NewFont(uri as string, size as integer) as object
+    f = createObject("roSGNode", "Font")
+    f.uri  = uri
+    f.size = size
+    return f
 end function

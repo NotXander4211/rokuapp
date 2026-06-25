@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <component name="HomeScreen" extends="Scene">
     <children>
+        <Audio id = "homeAudio"/>
+        
         <Group id="menuGroup">
             <!-- Full screen background -->
             <Rectangle id="menuBg" width="1280" height="720" color="0x1A1A2EFF" />
@@ -93,71 +95,17 @@
                     horizAlign="center" vertAlign="center" color="0x8888AAFF" />
                 <Rectangle id="listHeaderDiv" width="490" height="1" translation="[14,56]" color="0x333355FF" />
 
-                <!-- ── Entry 0: Tic-Tac-Toe ── -->
-                <Group id="gameEntry0" translation="[8,68]">
-                    <Rectangle id="entry0Bg"     width="502" height="172" color="0x252545FF" />
-                    <Rectangle id="entry0Accent" width="5"   height="172" translation="[0,0]" color="0x662D91FF" />
-                    <Label id="entry0Title" text="TIC-TAC-TOE"
-                        width="460" height="42" translation="[18,12]"
-                        horizAlign="left" vertAlign="center" color="0xFFFFFFFF" />
-                    <Label id="entry0Stars" text="&#x2605;&#x2606;&#x2606;&#x2606;&#x2606;"
-                        width="250" height="28" translation="[18,56]"
-                        horizAlign="left" vertAlign="center" color="0xFFD700FF" />
-                    <Label id="entry0Diff" text="Easy"
-                        width="200" height="22" translation="[18,86]"
-                        horizAlign="left" vertAlign="center" color="0x8888AAFF" />
-                    <Label id="entry0Length" text="~3 min avg"
-                        width="460" height="22" translation="[18,118]"
-                        horizAlign="left" vertAlign="center" color="0x6666AAFF" />
-                    <Rectangle id="entry0BorderTop"    width="502" height="3" translation="[0,0]"    color="0x00000000" />
-                    <Rectangle id="entry0BorderBottom" width="502" height="3" translation="[0,169]"  color="0x00000000" />
-                    <Rectangle id="entry0BorderLeft"   width="3"   height="172" translation="[0,0]"  color="0x00000000" />
-                    <Rectangle id="entry0BorderRight"  width="3"   height="172" translation="[499,0]" color="0x00000000" />
+                <!-- ── Scrollable game cards (cards are built in code) ── -->
+                <!-- clippingRect hides any cards that scroll past the panel edges -->
+                <Group id="cardsViewport" translation="[8,68]" clippingRect="[0,0,502,602]">
+                    <Group id="cardsContent" translation="[0,0]" />
                 </Group>
 
-                <!-- ── Entry 1: Checkers ── -->
-                <Group id="gameEntry1" translation="[8,250]">
-                    <Rectangle id="entry1Bg"     width="502" height="172" color="0x252545FF" />
-                    <Rectangle id="entry1Accent" width="5"   height="172" translation="[0,0]" color="0x662D91FF" />
-                    <Label id="entry1Title" text="CHECKERS"
-                        width="460" height="42" translation="[18,12]"
-                        horizAlign="left" vertAlign="center" color="0xFFFFFFFF" />
-                    <Label id="entry1Stars" text="&#x2605;&#x2605;&#x2605;&#x2606;&#x2606;"
-                        width="250" height="28" translation="[18,56]"
-                        horizAlign="left" vertAlign="center" color="0xFFD700FF" />
-                    <Label id="entry1Diff" text="Medium"
-                        width="200" height="22" translation="[18,86]"
-                        horizAlign="left" vertAlign="center" color="0x8888AAFF" />
-                    <Label id="entry1Length" text="~15 min avg"
-                        width="460" height="22" translation="[18,118]"
-                        horizAlign="left" vertAlign="center" color="0x6666AAFF" />
-                    <Rectangle id="entry1BorderTop"    width="502" height="3" translation="[0,0]"    color="0x00000000" />
-                    <Rectangle id="entry1BorderBottom" width="502" height="3" translation="[0,169]"  color="0x00000000" />
-                    <Rectangle id="entry1BorderLeft"   width="3"   height="172" translation="[0,0]"  color="0x00000000" />
-                    <Rectangle id="entry1BorderRight"  width="3"   height="172" translation="[499,0]" color="0x00000000" />
-                </Group>
-
-                <!-- ── Entry 2: Connect 4 ── -->
-                <Group id="gameEntry2" translation="[8,432]">
-                    <Rectangle id="entry2Bg"     width="502" height="172" color="0x252545FF" />
-                    <Rectangle id="entry2Accent" width="5"   height="172" translation="[0,0]" color="0x662D91FF" />
-                    <Label id="entry2Title" text="CONNECT 4"
-                        width="460" height="42" translation="[18,12]"
-                        horizAlign="left" vertAlign="center" color="0xFFFFFFFF" />
-                    <Label id="entry2Stars" text="&#x2605;&#x2605;&#x2606;&#x2606;&#x2606;"
-                        width="250" height="28" translation="[18,56]"
-                        horizAlign="left" vertAlign="center" color="0xFFD700FF" />
-                    <Label id="entry2Diff" text="Normal"
-                        width="200" height="22" translation="[18,86]"
-                        horizAlign="left" vertAlign="center" color="0x8888AAFF" />
-                    <Label id="entry2Length" text="~5 min avg"
-                        width="460" height="22" translation="[18,118]"
-                        horizAlign="left" vertAlign="center" color="0x6666AAFF" />
-                    <Rectangle id="entry2BorderTop"    width="502" height="3" translation="[0,0]"    color="0x00000000" />
-                    <Rectangle id="entry2BorderBottom" width="502" height="3" translation="[0,169]"  color="0x00000000" />
-                    <Rectangle id="entry2BorderLeft"   width="3"   height="172" translation="[0,0]"  color="0x00000000" />
-                    <Rectangle id="entry2BorderRight"  width="3"   height="172" translation="[499,0]" color="0x00000000" />
-                </Group>
+                <!-- Scroll affordances: colored in only when more cards exist -->
+                <Label id="scrollUpHint"   text="&#x25B2;" width="502" height="10" translation="[8,58]"
+                    horizAlign="center" vertAlign="center" color="0x00000000" />
+                <Label id="scrollDownHint" text="&#x25BC;" width="502" height="10" translation="[8,656]"
+                    horizAlign="center" vertAlign="center" color="0x00000000" />
             </Group>
         </Group>
 
@@ -210,11 +158,23 @@
                         horizAlign="center" vertAlign="center" color="0x8888AAFF" />
                 </Group>
 
+                <!-- Row 2: Game Music -->
+                <Group id="sMusicRow" translation="[30,194]">
+                    <Rectangle id="sMusicRowBg"  width="640" height="52" color="0x252545FF" />
+                    <Rectangle id="sMusicAccent" width="4"   height="52" color="0x00000000" />
+                    <Label id="sMusicLabel" text="Game Music"
+                        width="200" height="52" translation="[12,0]"
+                        horizAlign="left" vertAlign="center" color="0x8888AAFF" />
+                    <Label id="sMusicValue" text="Press OK to Search Track"
+                        width="400" height="52" translation="[225,0]"
+                        horizAlign="left" vertAlign="center" color="0xFFFFFFFF" />
+                </Group>
+
                 <!-- Divider -->
-                <Rectangle id="sDiv1" width="640" height="1" translation="[30,198]" color="0x333355FF" />
+                <Rectangle id="sDiv1" width="640" height="1" translation="[30,260]" color="0x333355FF" />
 
                 <!-- Row 2: Dev Mode -->
-                <Group id="sDevRow" translation="[30,208]">
+                <Group id="sDevRow" translation="[30,270]">
                     <Rectangle id="sDevRowBg"  width="640" height="52" color="0x252545FF" />
                     <Rectangle id="sDevAccent" width="4"   height="52" color="0x00000000" />
                     <Label id="sDevLabel" text="Dev Mode"
@@ -226,10 +186,10 @@
                 </Group>
 
                 <!-- Divider 2 (only when dev mode on) -->
-                <Rectangle id="sDiv2" width="640" height="1" translation="[30,270]" color="0x333355FF" visible="false" />
+                <Rectangle id="sDiv2" width="640" height="1" translation="[30,332]" color="0x333355FF" visible="false" />
 
                 <!-- Row 3: Player 1 Profile (dev mode only) -->
-                <Group id="sP1Row" translation="[30,280]" visible="false">
+                <Group id="sP1Row" translation="[30,342]" visible="false">
                     <Rectangle id="sP1RowBg"  width="640" height="52" color="0x252545FF" />
                     <Rectangle id="sP1Accent" width="4"   height="52" color="0x00000000" />
                     <Label id="sP1Label" text="Player 1 Profile"
@@ -244,7 +204,7 @@
                 </Group>
 
                 <!-- Row 4: Player 2 Profile (dev mode only) -->
-                <Group id="sP2Row" translation="[30,342]" visible="false">
+                <Group id="sP2Row" translation="[30,404]" visible="false">
                     <Rectangle id="sP2RowBg"  width="640" height="52" color="0x252545FF" />
                     <Rectangle id="sP2Accent" width="4"   height="52" color="0x00000000" />
                     <Label id="sP2Label" text="Player 2 Profile"
@@ -329,7 +289,6 @@
                         width="32" height="52" translation="[600,0]"
                         horizAlign="center" vertAlign="center" color="0x8888AAFF" />
                 </Group>
-
                 <Label id="profileHint"
                     text="LEFT/RIGHT Preset Names   OK Type Custom   BACK Save"
                     width="700" height="28" translation="[0,334]"

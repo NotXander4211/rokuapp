@@ -37,41 +37,11 @@ function init()
     m.listHeader    = m.top.findNode("listHeader")
     m.listHeaderDiv = m.top.findNode("listHeaderDiv")
 
-    ' Entry 0
-    m.entry0Bg           = m.top.findNode("entry0Bg")
-    m.entry0Accent       = m.top.findNode("entry0Accent")
-    m.entry0Title        = m.top.findNode("entry0Title")
-    m.entry0Stars        = m.top.findNode("entry0Stars")
-    m.entry0Diff         = m.top.findNode("entry0Diff")
-    m.entry0Length       = m.top.findNode("entry0Length")
-    m.entry0BorderTop    = m.top.findNode("entry0BorderTop")
-    m.entry0BorderBottom = m.top.findNode("entry0BorderBottom")
-    m.entry0BorderLeft   = m.top.findNode("entry0BorderLeft")
-    m.entry0BorderRight  = m.top.findNode("entry0BorderRight")
-
-    ' Entry 1
-    m.entry1Bg           = m.top.findNode("entry1Bg")
-    m.entry1Accent       = m.top.findNode("entry1Accent")
-    m.entry1Title        = m.top.findNode("entry1Title")
-    m.entry1Stars        = m.top.findNode("entry1Stars")
-    m.entry1Diff         = m.top.findNode("entry1Diff")
-    m.entry1Length       = m.top.findNode("entry1Length")
-    m.entry1BorderTop    = m.top.findNode("entry1BorderTop")
-    m.entry1BorderBottom = m.top.findNode("entry1BorderBottom")
-    m.entry1BorderLeft   = m.top.findNode("entry1BorderLeft")
-    m.entry1BorderRight  = m.top.findNode("entry1BorderRight")
-
-    ' Entry 2
-    m.entry2Bg           = m.top.findNode("entry2Bg")
-    m.entry2Accent       = m.top.findNode("entry2Accent")
-    m.entry2Title        = m.top.findNode("entry2Title")
-    m.entry2Stars        = m.top.findNode("entry2Stars")
-    m.entry2Diff         = m.top.findNode("entry2Diff")
-    m.entry2Length       = m.top.findNode("entry2Length")
-    m.entry2BorderTop    = m.top.findNode("entry2BorderTop")
-    m.entry2BorderBottom = m.top.findNode("entry2BorderBottom")
-    m.entry2BorderLeft   = m.top.findNode("entry2BorderLeft")
-    m.entry2BorderRight  = m.top.findNode("entry2BorderRight")
+    ' ── Scrollable game cards (card nodes are created in buildCards) ──
+    m.cardsViewport  = m.top.findNode("cardsViewport")
+    m.cardsContent   = m.top.findNode("cardsContent")
+    m.scrollUpHint   = m.top.findNode("scrollUpHint")
+    m.scrollDownHint = m.top.findNode("scrollDownHint")
 
     ' ── Settings overlay nodes ──
     m.settingsOverlay  = m.top.findNode("settingsOverlay")
@@ -112,82 +82,99 @@ function init()
     m.pEffectAccent   = m.top.findNode("pEffectAccent")
     m.pEffectValue    = m.top.findNode("pEffectValue")
 
-    ' ── Font sizes: detail panel ──
-    m.topTitle.font.size         = 22
-    m.detailGameTitle.font.size  = 46
-    m.detailTagline.font.size    = 17
-    m.statDiffLabel.font.size    = 13
-    m.statDiffValue.font.size    = 22
-    m.statDiffText.font.size     = 14
-    m.statLenLabel.font.size     = 13
-    m.statLenValue.font.size     = 20
-    m.statPlayersLabel.font.size = 13
-    m.statPlayersValue.font.size = 20
-    m.howToPlayTitle.font.size   = 13
-    m.howTo1.font.size           = 17
-    m.howTo2.font.size           = 17
-    m.howTo3.font.size           = 17
-    m.detailPlayHint.font.size   = 20
-    m.detailNavHint.font.size    = 13
-    m.listHeader.font.size       = 16
-    m.entry0Title.font.size  = 24 : m.entry0Stars.font.size  = 18
-    m.entry0Diff.font.size   = 14 : m.entry0Length.font.size = 14
-    m.entry1Title.font.size  = 24 : m.entry1Stars.font.size  = 18
-    m.entry1Diff.font.size   = 14 : m.entry1Length.font.size = 14
-    m.entry2Title.font.size  = 24 : m.entry2Stars.font.size  = 18
-    m.entry2Diff.font.size   = 14 : m.entry2Length.font.size = 14
+    ' ── Fonts ──
+    ' Headings/titles use the Audiowide display face; body text uses Chakra Petch.
+    ' Star-rating labels stay on the system font (custom faces lack the ★/☆ glyphs).
+    DISP = "pkg:/fonts/Audiowide-Regular.ttf"
+    BODY = "pkg:/fonts/ChakraPetch-Regular.ttf"
 
-    ' ── Font sizes: settings overlay ──
-    m.top.findNode("settingsTopTitle").font.size = 22
-    m.top.findNode("sThemeLabel").font.size   = 18
-    m.sThemeArrowL.font.size                  = 20
-    m.sThemeValue.font.size                   = 18
-    m.sThemeArrowR.font.size                  = 20
-    m.top.findNode("sEffectLabel").font.size  = 18
-    m.sEffectArrowL.font.size                 = 20
-    m.sEffectValue.font.size                  = 18
-    m.sEffectArrowR.font.size                 = 20
-    m.top.findNode("sDevLabel").font.size     = 18
-    m.sDevValue.font.size                     = 18
-    m.top.findNode("sP1Label").font.size      = 18
-    m.sP1NamePreview.font.size                = 17
-    m.top.findNode("sP1Arrow").font.size      = 20
-    m.top.findNode("sP2Label").font.size      = 18
-    m.sP2NamePreview.font.size                = 17
-    m.top.findNode("sP2Arrow").font.size      = 20
-    m.top.findNode("settingsHint").font.size  = 13
+    ' Detail panel
+    m.topTitle.font          = NewFont(DISP, 22)
+    m.detailGameTitle.font   = NewFont(DISP, 46)
+    m.detailTagline.font     = NewFont(BODY, 17)
+    m.statDiffLabel.font     = NewFont(BODY, 13)
+    m.statDiffValue.font.size = 22                       ' stars → keep system font
+    m.statDiffText.font      = NewFont(BODY, 14)
+    m.statLenLabel.font      = NewFont(BODY, 13)
+    m.statLenValue.font      = NewFont(BODY, 20)
+    m.statPlayersLabel.font  = NewFont(BODY, 13)
+    m.statPlayersValue.font  = NewFont(BODY, 20)
+    m.howToPlayTitle.font    = NewFont(BODY, 13)
+    m.howTo1.font            = NewFont(BODY, 17)
+    m.howTo2.font            = NewFont(BODY, 17)
+    m.howTo3.font            = NewFont(BODY, 17)
+    m.detailPlayHint.font    = NewFont(DISP, 20)
+    m.detailNavHint.font     = NewFont(BODY, 13)
+    m.listHeader.font        = NewFont(DISP, 16)
+    ' (Game-card fonts are assigned per card inside buildCards())
 
-    ' ── Font sizes: profile overlay ──
-    m.profileTopTitle.font.size               = 22
-    m.top.findNode("pNameLabel").font.size    = 18
-    m.top.findNode("pNameArrowL").font.size   = 20
-    m.pNameValue.font.size                    = 18
-    m.top.findNode("pNameArrowR").font.size   = 20
-    m.top.findNode("pColorLabel").font.size   = 18
-    m.top.findNode("pColorArrowL").font.size  = 20
-    m.pColorValue.font.size                   = 18
-    m.top.findNode("pColorArrowR").font.size  = 20
-    m.top.findNode("pEffectLabel").font.size  = 18
-    m.top.findNode("pEffectArrowL").font.size = 20
-    m.pEffectValue.font.size                  = 18
-    m.top.findNode("pEffectArrowR").font.size = 20
-    m.top.findNode("profileHint").font.size   = 13
+    ' Settings overlay
+    m.top.findNode("settingsTopTitle").font = NewFont(DISP, 22)
+    m.top.findNode("sThemeLabel").font   = NewFont(BODY, 18)
+    m.sThemeArrowL.font                  = NewFont(BODY, 20)
+    m.sThemeValue.font                   = NewFont(BODY, 18)
+    m.sThemeArrowR.font                  = NewFont(BODY, 20)
+    m.top.findNode("sEffectLabel").font  = NewFont(BODY, 18)
+    m.sEffectArrowL.font                 = NewFont(BODY, 20)
+    m.sEffectValue.font                  = NewFont(BODY, 18)
+    m.sEffectArrowR.font                 = NewFont(BODY, 20)
+    m.top.findNode("sMusicLabel").font   = NewFont(BODY, 18)
+    m.top.findNode("sMusicValue").font   = NewFont(BODY, 16)
+    m.top.findNode("sDevLabel").font     = NewFont(BODY, 18)
+    m.sDevValue.font                     = NewFont(BODY, 18)
+    m.top.findNode("sP1Label").font      = NewFont(BODY, 18)
+    m.sP1NamePreview.font                = NewFont(BODY, 17)
+    m.top.findNode("sP1Arrow").font      = NewFont(BODY, 20)
+    m.top.findNode("sP2Label").font      = NewFont(BODY, 18)
+    m.sP2NamePreview.font                = NewFont(BODY, 17)
+    m.top.findNode("sP2Arrow").font      = NewFont(BODY, 20)
 
-    ' ── Game data ──
-    m.gameNames      = ["TIC-TAC-TOE", "CHECKERS", "CONNECT 4"]
-    m.gameTaglines   = ["Classic X vs O", "Strategy board game", "Connect four in a row"]
-    m.gameStars      = [chr(9733)+chr(9734)+chr(9734)+chr(9734)+chr(9734), chr(9733)+chr(9733)+chr(9733)+chr(9734)+chr(9734), chr(9733)+chr(9733)+chr(9734)+chr(9734)+chr(9734)]
-    m.gameDiffs      = ["Easy", "Medium", "Normal"]
-    m.gameLengths    = ["~3 min", "~15 min", "~5 min"]
-    m.gameComponents = ["TicTacToeGame", "CheckersGame", "Connect4Game"]
+    ' Profile overlay
+    m.profileTopTitle.font               = NewFont(DISP, 22)
+    m.top.findNode("pNameLabel").font    = NewFont(BODY, 18)
+    m.top.findNode("pNameArrowL").font   = NewFont(BODY, 20)
+    m.pNameValue.font                    = NewFont(BODY, 18)
+    m.top.findNode("pNameArrowR").font   = NewFont(BODY, 20)
+    m.top.findNode("pColorLabel").font   = NewFont(BODY, 18)
+    m.top.findNode("pColorArrowL").font  = NewFont(BODY, 20)
+    m.pColorValue.font                   = NewFont(BODY, 18)
+    m.top.findNode("pColorArrowR").font  = NewFont(BODY, 20)
+    m.top.findNode("pEffectLabel").font  = NewFont(BODY, 18)
+    m.top.findNode("pEffectArrowL").font = NewFont(BODY, 20)
+    m.pEffectValue.font                  = NewFont(BODY, 18)
+    m.top.findNode("pEffectArrowR").font = NewFont(BODY, 20)
+    m.top.findNode("profileHint").font   = NewFont(BODY, 13)
 
-    m.gameHowTo = []
-    tic = [">"+chr(160)+"Take turns placing X and O", ">"+chr(160)+"Get 3 in a row to win", ">"+chr(160)+"Draw if the board fills up"]
-    m.gameHowTo.Push(tic)
-    chk = [">"+chr(160)+"Move your pieces diagonally", ">"+chr(160)+"Jump over enemies to capture", ">"+chr(160)+"King up by reaching the far side"]
-    m.gameHowTo.Push(chk)
-    c4  = [">"+chr(160)+"Drop pieces into columns", ">"+chr(160)+"Pieces fall to the lowest slot", ">"+chr(160)+"Connect 4 in a row to win"]
-    m.gameHowTo.Push(c4)
+    ' ── Game data ──────────────────────────────────────────────
+    ' ONE place to manage games. To add a game, copy a block below.
+    ' Set available=false for a game whose component isn't built yet:
+    ' it still gets a banner you can scroll to, but shows a "coming
+    ' soon" message instead of trying to launch a missing component.
+    '   stars     : 0-5 (filled stars in the rating)
+    '   component : the roSGNode component name to launch
+    '   available : false = banner only (no component needed yet)
+    m.games = []
+
+    addGame("TIC-TAC-TOE", "Classic X vs O", 1, "Easy", "~3 min", "2", "TicTacToeGame", true, [_
+        ">"+chr(160)+"Take turns placing X and O", _
+        ">"+chr(160)+"Get 3 in a row to win", _
+        ">"+chr(160)+"Draw if the board fills up"])
+
+    addGame("CHECKERS", "Strategy board game", 3, "Medium", "~15 min", "2", "CheckersGame", true, [_
+        ">"+chr(160)+"Move your pieces diagonally", _
+        ">"+chr(160)+"Jump over enemies to capture", _
+        ">"+chr(160)+"King up by reaching the far side"])
+
+    addGame("CONNECT 4", "Connect four in a row", 2, "Normal", "~5 min", "2", "Connect4Game", true, [_
+        ">"+chr(160)+"Drop pieces into columns", _
+        ">"+chr(160)+"Pieces fall to the lowest slot", _
+        ">"+chr(160)+"Connect 4 in a row to win"])
+
+    ' ── New game: banner only, not built yet (available = false) ──
+    addGame("BLACKJACK", "Beat the dealer to 21", 3, "Medium", "~5 min", "1", "", false, [_
+        ">"+chr(160)+"Get as close to 21 as you can", _
+        ">"+chr(160)+"Hit for a card or stand to hold", _
+        ">"+chr(160)+"Beat the dealer without busting"])
 
     ' ── Home screen state ──
     m.selectedCard = 0
@@ -223,7 +210,7 @@ function init()
     m.p2 = {name: "Player 2", colorIdx: 1, effectIdx: 0}
 
     ' Settings screen state
-    m.settingsFocusRow = 0   ' 0=theme 1=effect 2=devMode 3=p1 4=p2
+    m.settingsFocusRow = 0   ' 0=theme 1=effect 2=music 3=devMode 4=p1 5=p2
 
     ' Profile editing state
     m.editingPlayer   = 1
@@ -240,25 +227,175 @@ function init()
     m.sP1NamePreview.text = m.p1.name
     m.sP2NamePreview.text = m.p2.name
 
+    ' Audio setup
+    m.audio = m.top.findNode("homeAudio")
+    m.audioContent = createObject("RoSGNode", "ContentNode")
+    m.audioContent.url = "https://audio.jukehost.co.uk/019ecc42-a0f5-734e-bb6d-82ff21521e38"
+    m.audioContent.streamFormat = "wav"
+    m.audio.content = m.audioContent
+    m.audio.control = "play"
+    m.audio.loop = true
+
+    m.scrollOffset = 0
+    buildCards()
     applyHomeTheme()
     updateDetail()
     updateFocus()
+    scrollToSelected()
+
+    ' ── Game Music row (settings overlay) ──
+    m.sMusicRow    = m.top.findNode("sMusicRow")
+    m.sMusicRowBg  = m.top.findNode("sMusicRowBg")
+    m.sMusicAccent = m.top.findNode("sMusicAccent")
+    m.sMusicLabel  = m.top.findNode("sMusicLabel")
+    m.sMusicValue  = m.top.findNode("sMusicValue")
+
+    ' Background-music search task (created on demand when OK is pressed)
+    m.musicTask  = invalid
+    m.musicOn    = true       ' background track begins playing during init
+    m.musicTitle = invalid    ' holds the searched track title once one is playing
 end function
 
 ' ════════════════════════════════════════════════════════════
 '  Game detail panel
 ' ════════════════════════════════════════════════════════════
 sub updateDetail()
-    g     = m.selectedCard
-    howTo = m.gameHowTo[g]
-    m.detailGameTitle.text = m.gameNames[g]
-    m.detailTagline.text   = m.gameTaglines[g]
-    m.statDiffValue.text   = m.gameStars[g]
-    m.statDiffText.text    = m.gameDiffs[g]
-    m.statLenValue.text    = m.gameLengths[g]
-    m.howTo1.text          = howTo[0]
-    m.howTo2.text          = howTo[1]
-    m.howTo3.text          = howTo[2]
+    g     = m.games[m.selectedCard]
+    howTo = g.howTo
+    m.detailGameTitle.text  = g.name
+    m.detailTagline.text    = g.tagline
+    m.statDiffValue.text    = starString(g.stars)
+    m.statDiffText.text     = g.diff
+    m.statLenValue.text     = g.length
+    m.statPlayersValue.text = g.players
+    m.howTo1.text           = howTo[0]
+    m.howTo2.text           = howTo[1]
+    m.howTo3.text           = howTo[2]
+end sub
+
+' ════════════════════════════════════════════════════════════
+'  Game list: data, card construction, and scrolling
+' ════════════════════════════════════════════════════════════
+
+' Append one game to the catalog. Called from init().
+sub addGame(name as String, tagline as String, stars as Integer, diff as String, length as String, players as String, component as String, available as Boolean, howTo as Object)
+    g = {}
+    g.name      = name
+    g.tagline   = tagline
+    g.stars     = stars
+    g.diff      = diff
+    g.length    = length
+    g.players   = players
+    g.component = component
+    g.available = available
+    g.howTo     = howTo
+    m.games.Push(g)
+end sub
+
+' Build the ★/☆ rating string for a 0-5 score.
+function starString(filled as Integer) as String
+    s = ""
+    for i = 1 to 5
+        if i <= filled then s = s + chr(9733) else s = s + chr(9734)
+    end for
+    return s
+end function
+
+' Create one banner card per game inside the scrolling content group.
+' Node refs for each card are stored in m.cards so focus/theme code can
+' restyle them by index.
+sub buildCards()
+    DISP = "pkg:/fonts/Audiowide-Regular.ttf"
+    BODY = "pkg:/fonts/ChakraPetch-Regular.ttf"
+
+    ' Card geometry (matches the original hardcoded layout)
+    m.cardWidth   = 502
+    m.cardHeight  = 172
+    m.cardSpacing = 182    ' card height + 10px gap
+    m.viewportH   = 602    ' visible height of the cards viewport
+
+    m.cards = []
+
+    for i = 0 to m.games.Count() - 1
+        g = m.games[i]
+
+        card = m.cardsContent.createChild("Group")
+        card.translation = [0, i * m.cardSpacing]
+
+        bg = card.createChild("Rectangle")
+        bg.width = m.cardWidth : bg.height = m.cardHeight : bg.color = "0x252545FF"
+
+        accent = card.createChild("Rectangle")
+        accent.width = 5 : accent.height = m.cardHeight : accent.color = "0x662D91FF"
+
+        title = card.createChild("Label")
+        title.width = 460 : title.height = 42 : title.translation = [18, 12]
+        title.horizAlign = "left" : title.vertAlign = "center"
+        title.font = NewFont(DISP, 24)
+        title.text = g.name
+
+        stars = card.createChild("Label")
+        stars.width = 250 : stars.height = 28 : stars.translation = [18, 56]
+        stars.horizAlign = "left" : stars.vertAlign = "center"
+        stars.font.size = 18                 ' stars stay on the system font
+        stars.color = "0xFFD700FF"
+        stars.text = starString(g.stars)
+
+        diff = card.createChild("Label")
+        diff.width = 200 : diff.height = 22 : diff.translation = [18, 86]
+        diff.horizAlign = "left" : diff.vertAlign = "center"
+        diff.font = NewFont(BODY, 14)
+        diff.text = g.diff
+
+        length = card.createChild("Label")
+        length.width = 460 : length.height = 22 : length.translation = [18, 118]
+        length.horizAlign = "left" : length.vertAlign = "center"
+        length.font = NewFont(BODY, 14)
+        length.text = g.length + " avg"
+
+        bTop = card.createChild("Rectangle")
+        bTop.width = m.cardWidth : bTop.height = 3 : bTop.translation = [0, 0] : bTop.color = "0x00000000"
+        bBot = card.createChild("Rectangle")
+        bBot.width = m.cardWidth : bBot.height = 3 : bBot.translation = [0, 169] : bBot.color = "0x00000000"
+        bLeft = card.createChild("Rectangle")
+        bLeft.width = 3 : bLeft.height = m.cardHeight : bLeft.translation = [0, 0] : bLeft.color = "0x00000000"
+        bRight = card.createChild("Rectangle")
+        bRight.width = 3 : bRight.height = m.cardHeight : bRight.translation = [499, 0] : bRight.color = "0x00000000"
+
+        ref = {}
+        ref.card   = card : ref.bg = bg : ref.accent = accent : ref.title = title
+        ref.stars  = stars : ref.diff = diff : ref.length = length
+        ref.bTop   = bTop : ref.bBot = bBot : ref.bLeft = bLeft : ref.bRight = bRight
+        m.cards.Push(ref)
+    end for
+end sub
+
+' Scroll the cards content so the selected card is fully visible, and
+' light up the up/down hint arrows when there's more above/below.
+sub scrollToSelected()
+    if m.cards = invalid then return
+
+    selTop = m.selectedCard * m.cardSpacing
+    selBot = selTop + m.cardHeight
+
+    offset = m.scrollOffset
+    if offset = invalid then offset = 0
+
+    if selTop < offset then offset = selTop
+    if selBot > offset + m.viewportH then offset = selBot - m.viewportH
+
+    totalH = m.games.Count() * m.cardSpacing - (m.cardSpacing - m.cardHeight)
+    maxOff = totalH - m.viewportH
+    if maxOff < 0 then maxOff = 0
+    if offset > maxOff then offset = maxOff
+    if offset < 0 then offset = 0
+
+    m.scrollOffset = offset
+    m.cardsContent.translation = [0, -offset]
+
+    t = getCurrentTheme()
+    if offset > 0     then m.scrollUpHint.color   = t.accent else m.scrollUpHint.color   = "0x00000000"
+    if offset < maxOff then m.scrollDownHint.color = t.accent else m.scrollDownHint.color = "0x00000000"
 end sub
 
 ' ════════════════════════════════════════════════════════════
@@ -279,25 +416,25 @@ function getThemes() as Object
     themes.Push(roku)
 
     dark = {}
-    dark.name="Dark" : dark.bg="0x0D0D0DFF" : dark.cardBg="0x1A1A1AFF"
-    dark.cardBgFocused="0x2A2A2AFF" : dark.accent="0xBB86FCFF"
-    dark.text="0xE0E0E0FF" : dark.textSec="0x777777FF"
-    dark.divider="0x2A2A2AFF" : dark.gridLine="0x444444FF"
-    dark.highlight="0xBB86FC66" : dark.selection="0x03DAC666"
-    dark.player1="0xCF6679FF" : dark.player2="0x03DAC6FF"
-    dark.boardLight="0x3E3E3EFF" : dark.boardDark="0x1A1A1AFF"
-    dark.winColor="0xBB86FCFF" : dark.cursorColor="0xBB86FC66"
+    dark.name="Dark" : dark.bg="0x003249FF" : dark.cardBg="0x004A66FF"
+    dark.cardBgFocused="0x00658AFF" : dark.accent="0x007EA7FF"
+    dark.text="0xCCDBDCFF" : dark.textSec="0x7FA8B0FF"
+    dark.divider="0x0E4A63FF" : dark.gridLine="0x4F8A9AFF"
+    dark.highlight="0x007EA766" : dark.selection="0x80CED766"
+    dark.player1="0x007EA7FF" : dark.player2="0x9AD1D4FF"
+    dark.boardLight="0x274257FF" : dark.boardDark="0x0E2233FF"
+    dark.winColor="0x9AD1D4FF" : dark.cursorColor="0x007EA766"
     themes.Push(dark)
 
     light = {}
-    light.name="Light" : light.bg="0xEEEEF2FF" : light.cardBg="0xFFFFFFFF"
-    light.cardBgFocused="0xE0D8F0FF" : light.accent="0x6200EEFF"
-    light.text="0x1A1A1AFF" : light.textSec="0x666666FF"
-    light.divider="0xCCCCCCFF" : light.gridLine="0x999999FF"
-    light.highlight="0x6200EE66" : light.selection="0x03DAC666"
-    light.player1="0xD32F2FFF" : light.player2="0x1565C0FF"
-    light.boardLight="0xFFE0B2FF" : light.boardDark="0xBF360CFF"
-    light.winColor="0x4CAF50FF" : light.cursorColor="0x6200EE66"
+    light.name="Light" : light.bg="0xCCDBDCFF" : light.cardBg="0xEAF2F2FF"
+    light.cardBgFocused="0x9AD1D4FF" : light.accent="0x007EA7FF"
+    light.text="0x003249FF" : light.textSec="0x33687CFF"
+    light.divider="0xA8C5C8FF" : light.gridLine="0x4E8A9CFF"
+    light.highlight="0x007EA766" : light.selection="0x80CED766"
+    light.player1="0x007EA7FF" : light.player2="0x003249FF"
+    light.boardLight="0xEAF2F2FF" : light.boardDark="0xB8DCE0FF"
+    light.winColor="0x007EA7FF" : light.cursorColor="0x007EA766"
     themes.Push(light)
 
     return themes
@@ -342,12 +479,15 @@ sub applyHomeTheme()
     m.listHeader.color    = t.textSec
     m.listHeaderDiv.color = t.divider
 
-    m.entry0Accent.color = t.accent : m.entry0Stars.color  = "0xFFD700FF"
-    m.entry0Diff.color   = t.textSec : m.entry0Length.color = t.gridLine
-    m.entry1Accent.color = t.accent : m.entry1Stars.color  = "0xFFD700FF"
-    m.entry1Diff.color   = t.textSec : m.entry1Length.color = t.gridLine
-    m.entry2Accent.color = t.accent : m.entry2Stars.color  = "0xFFD700FF"
-    m.entry2Diff.color   = t.textSec : m.entry2Length.color = t.gridLine
+    if m.cards <> invalid
+        for i = 0 to m.cards.Count() - 1
+            c = m.cards[i]
+            c.accent.color = t.accent
+            c.stars.color  = "0xFFD700FF"
+            c.diff.color   = t.textSec
+            c.length.color = t.gridLine
+        end for
+    end if
 
     ' Settings overlay
     m.top.findNode("settingsPanelBg").color  = t.bg
@@ -402,56 +542,29 @@ sub updateFocus()
     t           = getCurrentTheme()
     transparent = "0x00000000"
 
-    if m.selectedCard = 0
-        m.entry0Bg.color    = t.cardBgFocused
-        m.entry0Title.color = t.accent
-        setEntryBorder(0, t.accent)
-    else
-        m.entry0Bg.color    = t.cardBg
-        m.entry0Title.color = t.text
-        setEntryBorder(0, transparent)
-    end if
-
-    if m.selectedCard = 1
-        m.entry1Bg.color    = t.cardBgFocused
-        m.entry1Title.color = t.accent
-        setEntryBorder(1, t.accent)
-    else
-        m.entry1Bg.color    = t.cardBg
-        m.entry1Title.color = t.text
-        setEntryBorder(1, transparent)
-    end if
-
-    if m.selectedCard = 2
-        m.entry2Bg.color    = t.cardBgFocused
-        m.entry2Title.color = t.accent
-        setEntryBorder(2, t.accent)
-    else
-        m.entry2Bg.color    = t.cardBg
-        m.entry2Title.color = t.text
-        setEntryBorder(2, transparent)
+    if m.cards <> invalid
+        for i = 0 to m.cards.Count() - 1
+            c = m.cards[i]
+            if i = m.selectedCard
+                c.bg.color    = t.cardBgFocused
+                c.title.color = t.accent
+                setCardBorder(c, t.accent)
+            else
+                c.bg.color    = t.cardBg
+                c.title.color = t.text
+                setCardBorder(c, transparent)
+            end if
+        end for
     end if
 
     m.detailPlayHint.color = t.accent
 end sub
 
-sub setEntryBorder(idx as Integer, color as String)
-    if idx = 0
-        m.entry0BorderTop.color    = color
-        m.entry0BorderBottom.color = color
-        m.entry0BorderLeft.color   = color
-        m.entry0BorderRight.color  = color
-    else if idx = 1
-        m.entry1BorderTop.color    = color
-        m.entry1BorderBottom.color = color
-        m.entry1BorderLeft.color   = color
-        m.entry1BorderRight.color  = color
-    else
-        m.entry2BorderTop.color    = color
-        m.entry2BorderBottom.color = color
-        m.entry2BorderLeft.color   = color
-        m.entry2BorderRight.color  = color
-    end if
+sub setCardBorder(c as Object, color as String)
+    c.bTop.color   = color
+    c.bBot.color   = color
+    c.bLeft.color  = color
+    c.bRight.color = color
 end sub
 
 ' ════════════════════════════════════════════════════════════
@@ -468,7 +581,7 @@ function onKeyEvent(key as String, press as Boolean) as Boolean
     end if
 
     ' ── Home screen ──
-    if key = "options"
+    if key = "replay"
         openSettings()
         return true
     else if key = "up"
@@ -476,17 +589,19 @@ function onKeyEvent(key as String, press as Boolean) as Boolean
             m.selectedCard = m.selectedCard - 1
             updateDetail()
             updateFocus()
+            scrollToSelected()
         end if
         return true
     else if key = "down"
-        if m.selectedCard < 2
+        if m.selectedCard < m.games.Count() - 1
             m.selectedCard = m.selectedCard + 1
             updateDetail()
             updateFocus()
+            scrollToSelected()
         end if
         return true
     else if key = "OK"
-        launchGame(m.gameComponents[m.selectedCard])
+        launchGame(m.selectedCard)
         return true
     end if
 
@@ -520,6 +635,7 @@ sub openSettings()
         m.sP2Row.visible  = false
     end if
 
+    updateMusicLabel()
     updateSettingsFocus()
 end sub
 
@@ -539,8 +655,8 @@ function handleSettingsKey(key as String) as Boolean
         end if
         return true
     else if key = "down"
-        maxRow = 2
-        if m.devMode then maxRow = 4
+        maxRow = 3
+        if m.devMode then maxRow = 5
         if m.settingsFocusRow < maxRow
             m.settingsFocusRow = m.settingsFocusRow + 1
             updateSettingsFocus()
@@ -554,10 +670,12 @@ function handleSettingsKey(key as String) as Boolean
         return true
     else if key = "OK"
         if m.settingsFocusRow = 2
-            toggleDevMode()
+            startMusicSearch()
         else if m.settingsFocusRow = 3
-            openProfile(1)
+            toggleDevMode()
         else if m.settingsFocusRow = 4
+            openProfile(1)
+        else if m.settingsFocusRow = 5
             openProfile(2)
         end if
         return true
@@ -578,6 +696,15 @@ sub settingsAdjustValue(dir as Integer)
         if m.effectIndex < 0 then m.effectIndex = m.effectNames.Count() - 1
         if m.effectIndex >= m.effectNames.Count() then m.effectIndex = 0
         m.sEffectValue.text = m.effectNames[m.effectIndex]
+    else if m.settingsFocusRow = 2
+        ' Game Music row: LEFT/RIGHT toggles the audio on/off
+        m.musicOn = not m.musicOn
+        if m.musicOn
+            m.audio.control = "play"
+        else
+            m.audio.control = "stop"
+        end if
+        updateMusicLabel()
     end if
 end sub
 
@@ -595,7 +722,7 @@ sub toggleDevMode()
         m.sDiv2.visible   = false
         m.sP1Row.visible  = false
         m.sP2Row.visible  = false
-        if m.settingsFocusRow > 2 then m.settingsFocusRow = 2
+        if m.settingsFocusRow > 3 then m.settingsFocusRow = 3
         updateSettingsFocus()
     end if
 end sub
@@ -607,6 +734,7 @@ sub updateSettingsFocus()
     ' Reset all rows
     m.sThemeRowBg.color   = t.cardBg : m.sThemeAccent.color   = transparent
     m.sEffectRowBg.color  = t.cardBg : m.sEffectAccent.color  = transparent
+    m.sMusicRowBg.color   = t.cardBg : m.sMusicAccent.color   = transparent
     m.sDevRowBg.color     = t.cardBg : m.sDevAccent.color     = transparent
     m.sP1RowBg.color      = t.cardBg : m.sP1Accent.color      = transparent
     m.sP2RowBg.color      = t.cardBg : m.sP2Accent.color      = transparent
@@ -619,20 +747,94 @@ sub updateSettingsFocus()
         m.sEffectRowBg.color  = t.cardBgFocused
         m.sEffectAccent.color = t.accent
     else if m.settingsFocusRow = 2
+        m.sMusicRowBg.color  = t.cardBgFocused
+        m.sMusicAccent.color = t.accent
+    else if m.settingsFocusRow = 3
         m.sDevRowBg.color  = t.cardBgFocused
         m.sDevAccent.color = t.accent
-    else if m.settingsFocusRow = 3
+    else if m.settingsFocusRow = 4
         m.sP1RowBg.color  = t.cardBgFocused
         m.sP1Accent.color = t.accent
-    else if m.settingsFocusRow = 4
+    else if m.settingsFocusRow = 5
         m.sP2RowBg.color  = t.cardBgFocused
         m.sP2Accent.color = t.accent
     end if
 end sub
 
 ' ════════════════════════════════════════════════════════════
-'  Profile screen
+'  Game Music search + playback
 ' ════════════════════════════════════════════════════════════
+sub startMusicSearch()
+    dialog = CreateObject("roSGNode", "KeyboardDialog")
+    dialog.title   = "Game Music"
+    dialog.message = "Search for a track to play:"
+    dialog.buttons = ["Search", "Cancel"]
+    dialog.observeField("buttonSelected", "onMusicQueryDone")
+    m.top.dialog = dialog
+end sub
+
+sub onMusicQueryDone()
+    dialog = m.top.dialog
+    if dialog = invalid then return
+
+    confirmed = (dialog.buttonSelected = 0)
+    queryText = ""
+    if dialog.keyboard <> invalid then queryText = dialog.keyboard.text
+    m.top.dialog = invalid
+
+    if not confirmed then return
+    if queryText = invalid or queryText.Trim() = "" then return
+
+    m.sMusicValue.text = "Searching..."
+
+    ' Kick off the cloud lookup task and wait for its response
+    m.musicTask = CreateObject("roSGNode", "musicService")
+    m.musicTask.observeField("response", "onMusicResponse")
+    m.musicTask.query   = queryText.Trim()
+    m.musicTask.control = "RUN"
+end sub
+
+sub onMusicResponse()
+    if m.musicTask = invalid then return
+    resp = m.musicTask.response
+
+    if resp <> invalid and resp.url <> invalid
+        title = "Now Playing"
+        if resp.title <> invalid then title = resp.title
+
+        fmt = "m4a"
+        if resp.format <> invalid then fmt = resp.format
+
+        track = CreateObject("roSGNode", "ContentNode")
+        track.url          = resp.url
+        track.streamFormat = fmt
+
+        m.audio.control = "stop"
+        m.audio.content = track
+        m.audio.loop    = true
+        m.audio.control = "play"
+
+        m.musicTitle = title
+        m.musicOn    = true
+        updateMusicLabel()
+    else
+        m.sMusicValue.text = "No track found - Press OK to retry"
+    end if
+end sub
+
+' Refresh the Game Music row label from current state. Called when the
+' value changes and whenever Settings reopens (clears stale status text).
+sub updateMusicLabel()
+    if not m.musicOn
+        m.sMusicValue.text = "Music Off  (LEFT/RIGHT to turn on)"
+    else if m.musicTitle <> invalid
+        m.sMusicValue.text = m.musicTitle
+    else
+        m.sMusicValue.text = "Press OK to Search Track"
+    end if
+end sub
+
+
 sub openProfile(playerNum as Integer)
     m.editingPlayer   = playerNum
     m.profileFocusRow = 0
@@ -800,11 +1002,19 @@ end sub
 ' ════════════════════════════════════════════════════════════
 '  Launch / exit games
 ' ════════════════════════════════════════════════════════════
-sub launchGame(gameName as String)
+sub launchGame(idx as Integer)
+    g = m.games[idx]
+
+    ' Game not built yet → show a message instead of launching nothing
+    if not g.available or g.component = ""
+        showComingSoon(g)
+        return
+    end if
+
     m.menuGroup.visible     = false
     m.gameContainer.visible = true
 
-    gameNode = CreateObject("roSGNode", gameName)
+    gameNode = CreateObject("roSGNode", g.component)
 
     ' Build theme data, extending with profile info when dev mode is on
     t = getCurrentTheme()
@@ -844,3 +1054,28 @@ sub onExitGame()
     m.top.setFocus(true)
     updateFocus()
 end sub
+
+' Shown when a banner with available=false is selected.
+sub showComingSoon(g as Object)
+    dialog = CreateObject("roSGNode", "Dialog")
+    dialog.title   = g.name
+    dialog.message = "This game isn't available yet - coming soon!"
+    dialog.buttons = ["OK"]
+    dialog.observeField("buttonSelected", "onComingSoonDismiss")
+    m.top.dialog = dialog
+end sub
+
+sub onComingSoonDismiss()
+    m.top.dialog = invalid
+end sub
+
+' ────────────────────────────────────────────────────────────
+'  Build a Font node from a packaged TrueType file + size.
+'  Returns a fresh node each call so per-label sizes stay independent.
+' ────────────────────────────────────────────────────────────
+function NewFont(uri as string, size as integer) as object
+    f = createObject("roSGNode", "Font")
+    f.uri  = uri
+    f.size = size
+    return f
+end function
